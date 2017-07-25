@@ -3121,7 +3121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4943723093413396, guid: 28d5c04a24feebf4a8537f284ccb98ee, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.26
+      value: -0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4943723093413396, guid: 28d5c04a24feebf4a8537f284ccb98ee, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3147,11 +3147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114847164315555394, guid: 28d5c04a24feebf4a8537f284ccb98ee,
-        type: 2}
-      propertyPath: LevelAmbientSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 3bf28db30f1ee4c48a4d6bb0befdfc56, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28d5c04a24feebf4a8537f284ccb98ee, type: 2}
   m_IsPrefabParent: 0
@@ -3275,6 +3270,7 @@ MonoBehaviour:
   lookAheadFactor: 5
   lookAheadReturnSpeed: 0.5
   lookAheadMoveThreshold: 0.1
+  verticalAdjustment: 0.6
 --- !u!81 &1110275467
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4735,7 +4731,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300058, guid: 42280c82960188b4db1b5ed8815dff79, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9338235, g: 0.09612887, b: 0.09612887, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &1561812184
