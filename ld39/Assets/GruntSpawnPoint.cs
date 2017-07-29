@@ -19,7 +19,6 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 	}
 	void Awake() {
-		var gObj = (GameObject)Instantiate(Resources.Load("prefab/grunt"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 		StartCoroutine (spawnTime ());
 	}
 	// Update is called once per frame
