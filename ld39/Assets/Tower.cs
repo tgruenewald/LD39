@@ -12,8 +12,8 @@ public class Tower : MonoBehaviour {
 	public int power;
 	public int startpower;
 	public int maxpower;
-	//int powhold;
-	//public GameObject HOLD;
+	int powhold;
+
 	// Use this for initialization
 	void Start () {
 		power = startpower;
@@ -59,10 +59,11 @@ public class Tower : MonoBehaviour {
 
 		}
 		}
-		// (power > maxpower) {
-			//powhold = power - maxpower;
-			//GameObject.Find (HOLD).GetComponent<> ();
-		//}
+		 if(power > maxpower) {
+			powhold = power - maxpower;
+			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
+			power = maxpower;
+		}
 
 	}
 	void OnTriggerEnter2D(Collider2D coll){
@@ -71,9 +72,6 @@ public class Tower : MonoBehaviour {
 		    targetList.Enqueue (coll.gameObject);
 			coll.gameObject.GetComponent<Grunt> ().inRange = true;
         }
-		if (coll.gameObject.tag == "wind") {
-			power++;
-		}
 	}
 
 	void OnTriggerExit2D(Collider2D coll){
@@ -84,7 +82,7 @@ public class Tower : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-			towerMenu.SetActive(true);
+			
 	}
 
 }
