@@ -7,7 +7,9 @@ public class Grunt : MonoBehaviour {
 	private Transform target;
 	public float speed = 0.1f;
 	public int nextTargetIndex = 0;
+	public bool inRange = false;
 	bool done = false;
+
 	// Use this for initialization
 	void Start () {
 		target = targetList[nextTargetIndex];

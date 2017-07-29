@@ -19,23 +19,46 @@ public class Tower : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (targetList.Count > 0 && !alreadyFired) {
-			target = targetList.Dequeue ();
-			alreadyFired = true;
-			StartCoroutine (waitForNextShoot ());
-			GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+		if (targetList.Count > 0) {
+			var grunt = targetList.Peek ();
+			try {
+				if (!grunt.GetComponent<Grunt>().inRange) {
+					targetList.Dequeue ();
+				}
+				else {
+					if (targetList.Count > 0 && !alreadyFired) {
+						target = targetList.Dequeue ();
+						alreadyFired = true;
+						StartCoroutine (waitForNextShoot ());
+						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 
-			Debug.Log ("firing");
+						Debug.Log ("firing");
 
-			bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
+						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
+
+					}				
+				}				
+			}
+			catch (MissingReferenceException e) {
+				targetList.Dequeue ();
+			}
 
 		}
+
 	}
 	void OnTriggerEnter2D(Collider2D coll){
         if (coll.gameObject.tag == "Grunt") {
             Debug.Log("in range");
 		    targetList.Enqueue (coll.gameObject);
+			coll.gameObject.GetComponent<Grunt> ().inRange = true;
         }
+	}
+
+	void OnTriggerExit2D(Collider2D coll){
+		if (coll.gameObject.tag == "Grunt") {
+			Debug.Log("out of range");
+			coll.gameObject.GetComponent<Grunt> ().inRange = true;
+		}
 	}
 
 }
