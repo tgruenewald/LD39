@@ -21,18 +21,20 @@ public class Grunt : MonoBehaviour {
 	void FixedUpdate() {
 //		float step = speed * Time.deltaTime;
 		if (!done) {
-			Rigidbody2D rb = GetComponent<Rigidbody2D> ();
-			rb.velocity = Vector3.Normalize (target.transform.position - transform.position) * speed;
-			//transform.position = Vector3.MoveTowards (transform.position, target.position, step);
-			float distance = Vector3.Distance (transform.position, target.transform.position);
-			if (distance < 0.2f) {
-				++nextTargetIndex;
-				if (nextTargetIndex < targetList.Length) {
-					target = targetList [nextTargetIndex];		
-				} else {
-					done = true; // continue on last vector
-				}
+			if (target != null) {
+				Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+				rb.velocity = Vector3.Normalize (target.transform.position - transform.position) * speed;
+				//transform.position = Vector3.MoveTowards (transform.position, target.position, step);
+				float distance = Vector3.Distance (transform.position, target.transform.position);
+				if (distance < 0.2f) {
+					++nextTargetIndex;
+					if (nextTargetIndex < targetList.Length) {
+						target = targetList [nextTargetIndex];		
+					} else {
+						done = true; // continue on last vector
+					}
 
+				}
 			}
 		}
 
