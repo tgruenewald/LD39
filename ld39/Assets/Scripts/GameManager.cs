@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour {
 
 	void Start(){
 		StartCoroutine (BlinkText ());
+
+
 		StartCoroutine (NaturalDepletion());
 	}
 	void Update(){
 
-		powerAmountText.text = "Main Power: " + fortressPower;
 		if (fortressPower <= 100)
 		{
 			warningText.enabled = true;
@@ -30,8 +31,11 @@ public class GameManager : MonoBehaviour {
 
 		if (fortressPower <= 0)
 		{
-			//GameOver ();
+			GameOver ();
 		}
+
+		powerAmountText.text = "Main Power: " + fortressPower;
+
 	}//Update
 
 	public IEnumerator BlinkText(){
@@ -47,13 +51,14 @@ public class GameManager : MonoBehaviour {
 	public IEnumerator NaturalDepletion(){
 		while (true)
 		{
-			fortressPower -= (depletionRate * numberOfTowers)/10;
-			yield return new WaitForSeconds (1f);
+			fortressPower -= 1;
+			yield return new WaitForSeconds (1f/(depletionRate * numberOfTowers));
 		}
 	}
 
-	/*void GameOver(){
+	public void GameOver(){
+		StopCoroutine ("NaturalDepletion");
 		warningString = "YOU RAN OUT OF POWER";
 		fortressPower = 0;
-	}*/
+	}
 }
