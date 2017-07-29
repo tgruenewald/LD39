@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 41ca49a565521f44fb3d89b1c1610879
 timeCreated: 1501354378
+=======
+guid: 299a16fd41a4f8c4aafa23c5b68bd71a
+timeCreated: 1501354244
+>>>>>>> b34a696... tower placement hud
 licenseType: Free
 NativeFormatImporter:
   userData: 
