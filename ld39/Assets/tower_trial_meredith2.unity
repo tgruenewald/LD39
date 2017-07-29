@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 265157130}
-  bulletSpeed: 6
+  bulletSpeed: 3.5
 --- !u!1 &1108933233
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,8 +572,8 @@ MonoBehaviour:
   - {fileID: 1108933235}
   - {fileID: 1947445282}
   - {fileID: 2009200199}
-  target: {fileID: 1947445282}
-  speed: 0.1
+  target: {fileID: 0}
+  speed: 3.1
   nextTargetIndex: 0
 --- !u!58 &1946302600
 CircleCollider2D:

@@ -22,10 +22,10 @@ public class Tower : MonoBehaviour {
         {
            
             if (autoMode){
-                FireAutoMode;
+                FireAutoMode();
             }
             else {
-                FireDirectMode;
+                FireDirectMode();
             }
         }
 
