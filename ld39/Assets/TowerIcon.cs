@@ -5,14 +5,16 @@ using UnityEngine;
 public class TowerIcon : MonoBehaviour {
 
 	private Vector3 mousePosition;
-	public TowerButton TowerButton = GameObject.Find("Canvas").GetComponent<TowerButton>();
+	public TowerButton TowerButton;
 	public GameObject towerPrefab;
 	public float moveSpeed = 0.1f;
 	public bool moveTower = false;
 
 
 	//public Transform towerIconTransform;
-
+	void Awake() {
+		TowerButton = GameObject.Find("Canvas").GetComponent<TowerButton>();
+	}
 	// Use this for initialization
 	void Start () {
 
