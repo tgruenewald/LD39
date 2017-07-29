@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Grunt : MonoBehaviour {
 	public Transform[] targetList;// =new Transform[];
-	public Transform target;
+	private Transform target;
 	public float speed = 0.1f;
 	public int nextTargetIndex = 0;
+	bool done = false;
 	// Use this for initialization
 	void Start () {
 		target = targetList[nextTargetIndex];
@@ -19,12 +20,20 @@ public class Grunt : MonoBehaviour {
 
 	void FixedUpdate() {
 //		float step = speed * Time.deltaTime;
-		Rigidbody2D rb = GetComponent<Rigidbody2D> ();
-		rb.velocity = Vector3.Normalize (target.transform.position - transform.position) * speed;
-		//transform.position = Vector3.MoveTowards (transform.position, target.position, step);
-		float distance = Vector3.Distance (transform.position, target.transform.position);
-		if ( distance < 0.2f) {
-			target = targetList[++nextTargetIndex];
+		if (!done) {
+			Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+			rb.velocity = Vector3.Normalize (target.transform.position - transform.position) * speed;
+			//transform.position = Vector3.MoveTowards (transform.position, target.position, step);
+			float distance = Vector3.Distance (transform.position, target.transform.position);
+			if (distance < 0.2f) {
+				++nextTargetIndex;
+				if (nextTargetIndex < targetList.Length) {
+					target = targetList [nextTargetIndex];		
+				} else {
+					done = true; // continue on last vector
+				}
+
+			}
 		}
 
 	}
