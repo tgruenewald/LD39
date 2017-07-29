@@ -5,7 +5,11 @@ using System.Collections;
 
 public static class GameState
 {
-    private static GameObject droplet = null;
+	
+
+
+
+	private static GameObject droplet = null;
     public static GameObject introMusic = null;
 
 
