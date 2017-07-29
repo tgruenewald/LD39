@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grunt
   - marker
+  - wind
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 3141270861
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
