@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grunt
   - marker
+  - wind
   layers:
   - Default
   - TransparentFX
