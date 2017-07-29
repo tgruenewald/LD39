@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grunt : MonoBehaviour {
 	public Transform[] targetList;// =new Transform[];
 	public Transform target;
-	public float speed = 3f;
+	public float speed = 0.1f;
 	public int nextTargetIndex = 0;
 	// Use this for initialization
 	void Start () {
@@ -18,9 +18,11 @@ public class Grunt : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		float step = speed * Time.deltaTime;
+//		float step = speed * Time.deltaTime;
+		Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+		rb.velocity = Vector3.Normalize (target.transform.position - transform.position) * speed;
+		//transform.position = Vector3.MoveTowards (transform.position, target.position, step);
 		float distance = Vector3.Distance (transform.position, target.transform.position);
-		transform.position = Vector3.MoveTowards (transform.position, target.position, step);
 		if ( distance < 0.2f) {
 			target = targetList[++nextTargetIndex];
 		}
