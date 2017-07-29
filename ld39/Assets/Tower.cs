@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour {
 	Queue<GameObject> targetList = new Queue<GameObject> ();
 	GameObject target = null;
 	public float bulletSpeed = 6f;
 	private bool alreadyFired = false;
+
+	CanvasObject.GetComponent<TowerMenu>();
+
 	// Use this for initialization
 	void Start () {
 		// bullet.transform.position = transform.position;
@@ -36,6 +40,10 @@ public class Tower : MonoBehaviour {
             Debug.Log("in range");
 		    targetList.Enqueue (coll.gameObject);
         }
+	}
+
+	void OnMouseEnter(){
+			towerMenu.SetActive(true);
 	}
 
 }
