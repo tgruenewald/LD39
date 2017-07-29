@@ -35,6 +35,7 @@ public class Tower : MonoBehaviour {
 				if (targetList.Count > 0) {
 			var grunt = targetList.Peek ();
 			try {
+				var grunt = targetList.Peek ();
 				if (!grunt.GetComponent<Grunt>().inRange) {
 					targetList.Dequeue ();
 				}
