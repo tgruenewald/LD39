@@ -16,6 +16,8 @@ public class ShootUtil {
 		// t2 = d+e
 		// t = (t1 > t2 && t2 > 0 ) ? t2 : t1
 		// velocity =( target.position + target.velocity*t - tower.position) / t
+		try {
+			
 
 		Vector2 targetVelocityTmp = target.GetComponent<Rigidbody2D>().velocity;
 		Vector3 targetVelocity = new Vector3 (targetVelocityTmp.x, targetVelocityTmp.y, 0);
@@ -41,5 +43,10 @@ public class ShootUtil {
 		//			Debug.Log (t2);
 		//			Debug.Log (t);
 		return new Vector2 (bulletVelocity.x, bulletVelocity.y);
+		}
+		catch (MissingReferenceException e) {
+			// just ignore
+		}
+		return new Vector2();
 	}
 }
