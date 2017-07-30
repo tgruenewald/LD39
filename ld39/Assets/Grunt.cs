@@ -9,7 +9,7 @@ public class Grunt : MonoBehaviour {
 	public int nextTargetIndex = 0;
 	public bool inRange = false;
 	bool done = false;
-
+	public int health;
 	// Use this for initialization
 	void Start () {
 		target = targetList[nextTargetIndex];
@@ -17,7 +17,10 @@ public class Grunt : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (health <= 0) 
+		{
+			Destroy (this.gameObject);
+		}
 	}
 
 	void FixedUpdate() {
