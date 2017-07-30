@@ -42,6 +42,11 @@ public class ShootUtil {
 		//			Debug.Log (t1);
 		//			Debug.Log (t2);
 		//			Debug.Log (t);
+			if (float.IsNaN(bulletVelocity.x) || float.IsNaN(bulletVelocity.y))
+			{
+				Debug.Log("NAN DETECTED!!!");
+				return new Vector2();
+			}
 		return new Vector2 (bulletVelocity.x, bulletVelocity.y);
 		//	return  Vector3.Normalize (target.transform.position - startingPosition.position) * speed;
 		}
