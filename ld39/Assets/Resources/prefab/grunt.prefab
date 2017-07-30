@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 3.1
+  speed: 5
   nextTargetIndex: 0
   inRange: 0
 --- !u!212 &212823008612585580
