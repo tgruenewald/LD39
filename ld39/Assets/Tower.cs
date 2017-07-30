@@ -15,10 +15,12 @@ public class Tower : MonoBehaviour {
 	int powhold;
 
 	// Use this for initialization
+
 	public Transform canvas;
 	public Slider towerEnergyBar;
 	Slider newBar;
 	Vector3 barPosition;
+	public GameObject superchargeText;
 
 	void Start () {
 		power = startpower;
@@ -32,6 +34,7 @@ public class Tower : MonoBehaviour {
 	void Awake()
 	{
 		canvas = GameObject.Find("Canvas").transform;
+
 
 
 	}
@@ -80,7 +83,7 @@ catch (MissingReferenceException e) {
 			// just ignore
 		}
 		}
-		 if(power > maxpower) {
+		if(power > maxpower) {
 			powhold = power - maxpower;
 			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
 			power = maxpower;
@@ -112,6 +115,7 @@ catch (MissingReferenceException e) {
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
 
+
 		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
 
 
@@ -119,8 +123,9 @@ catch (MissingReferenceException e) {
 
 		newBar.value = startpower;
 		newBar.maxValue = startpower * 2;
+
+		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
+	
 	}
-
-
 
 }
