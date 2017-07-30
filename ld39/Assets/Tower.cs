@@ -67,7 +67,7 @@ public class Tower : MonoBehaviour {
 							power--;
 						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 
-						Debug.Log ("firing");
+							Debug.Log ("firing");
 
 						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
 							Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
@@ -77,8 +77,11 @@ public class Tower : MonoBehaviour {
 
 
 
+						}				
 					}				
-								
+				catch (MissingReferenceException e) {
+					targetList.Dequeue ();
+				}								
 			}
 catch (MissingReferenceException e) {
 			// just ignore
