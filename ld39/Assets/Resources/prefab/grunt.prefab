@@ -96,7 +96,7 @@ MonoBehaviour:
   speed: 3.1
   nextTargetIndex: 0
   inRange: 0
-  health: 10
+  health: 1
 --- !u!212 &212823008612585580
 SpriteRenderer:
   m_ObjectHideFlags: 1

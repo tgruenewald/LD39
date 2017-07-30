@@ -22,6 +22,7 @@ public class Tower : MonoBehaviour {
 	Vector3 barPosition;
 	Vector3 superTextPos;
 	public GameObject superchargeText;
+	public int mouseCounter = 0;
 
 	void Start () {
 		power = startpower;
@@ -42,11 +43,14 @@ public class Tower : MonoBehaviour {
 	IEnumerator waitForNextShoot() {
 		yield return new WaitForSeconds(1f);
 		alreadyFired = false;
-		Debug.Log ("ready to fire");
 
 	}
 	// Update is called once per frame
 	void Update () {
+		if (mouseCounter == 0) {
+			Debug.Log ("Restoring outer collider");
+			GetComponent<Collider2D> ().enabled = true;
+		}
 		if (power <= 0) {
 			//Debug.Log ("Reloading");
 		}
@@ -67,7 +71,6 @@ public class Tower : MonoBehaviour {
 							power--;
 						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 
-							Debug.Log ("firing");
 
 						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
 							Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
@@ -115,9 +118,13 @@ public class Tower : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
+		Debug.Log ("mouse entering collider");
+		mouseCounter++;
 		GetComponent<Collider2D> ().enabled = false;
 	}
-
+	void OnMouseExit(){
+		mouseCounter--;
+	}
 
 	void CreateEnergyBar(){
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
