@@ -35,11 +35,11 @@ public class Tower : MonoBehaviour {
 				if (targetList.Count > 0) {
 
 			try {
-				var grunt = targetList.Peek ();
-				if (!grunt.GetComponent<Grunt>().inRange) {
-					targetList.Dequeue ();
-				}
-				else {
+
+					while (!targetList.Peek ().GetComponent<Grunt>().inRange) {
+						targetList.Dequeue ();
+					}
+				 
 					if (targetList.Count > 0 && !alreadyFired) {
 						target = targetList.Dequeue ();
 						alreadyFired = true;
@@ -50,9 +50,15 @@ public class Tower : MonoBehaviour {
 						Debug.Log ("firing");
 
 						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
+							Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
+							bullet.GetComponent<Bullet>().origTargetVelocity = targetVelocity;
+							bullet.GetComponent<Bullet>().origTarget = target;
+							bullet.GetComponent<Bullet>().speed = bulletSpeed;
+
+
 
 					}				
-				}				
+								
 			}
 			catch (MissingReferenceException e) {
 				targetList.Dequeue ();
@@ -78,7 +84,7 @@ public class Tower : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D coll){
 		if (coll.gameObject.tag == "Grunt") {
 			Debug.Log("out of range");
-			coll.gameObject.GetComponent<Grunt> ().inRange = true;
+			coll.gameObject.GetComponent<Grunt> ().inRange = false;
 		}
 	}
 
