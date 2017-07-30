@@ -104,6 +104,7 @@ public class Tower : MonoBehaviour {
 		GetComponent<Collider2D> ().enabled = false;
 	}
 
+<<<<<<< HEAD
 	void CreateEnergyBar(){
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
@@ -115,6 +116,9 @@ public class Tower : MonoBehaviour {
 		newBar.value = startpower;
 		newBar.maxValue = startpower * 2;
 	}
+=======
+
+>>>>>>> fixed hud for tower pop-up menu
 
 
 
