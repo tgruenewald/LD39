@@ -147,6 +147,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1440932109127320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224827260063887452}
+  - component: {fileID: 222700634553454738}
+  - component: {fileID: 114792673679962122}
+  m_Layer: 5
+  m_Name: WarningText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1503398021334256
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +175,7 @@ GameObject:
   - component: {fileID: 222510453557183858}
   - component: {fileID: 114533426960822962}
   m_Layer: 5
-  m_Name: WarningText
+  m_Name: BuildingWarningText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +377,7 @@ MonoBehaviour:
   depletionRate: 100
   numberOfTowers: 1
   warningLevel: 250
-  warningText: {fileID: 114533426960822962}
+  warningText: {fileID: 114792673679962122}
   powerAmountText: {fileID: 114336076254148008}
   warningString: 
   energyBar: {fileID: 114452427525429576}
@@ -563,8 +580,10 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: To cancel, press the space bar.
+    m_LineSpacing: 1.5
+  m_Text: 'To cancel, press the space bar.
+
+    Tower Cost: 100 Power'
 --- !u!114 &114427258506114620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,10 +631,13 @@ MonoBehaviour:
   towerIcon: {fileID: 1981003097284978, guid: 0ba0b844a07843b4eae4480556a3144e, type: 2}
   towerPrefab: {fileID: 1747901003981512, guid: 898aedbc695489f4389b5997d39ae720,
     type: 2}
+  buildingWarningText: {fileID: 114533426960822962}
   cancelText: {fileID: 114366138164046418}
   moveSpeed: 0.1
   moveTower: 0
   creating: 0
+  dangerousBuild: 0
+  towerCost: 100
   placingTowerIcon: {fileID: 0}
 --- !u!114 &114452427525429576
 MonoBehaviour:
@@ -739,7 +761,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503398021334256}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -754,7 +776,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 38fe7be68a9966244827656eaf2d7728, type: 3}
-    m_FontSize: 36
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -762,10 +784,12 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'WARNING: RUNNING OUT OF POWER'
+  m_Text: 'Power will be dangeorusly low.
+
+    Click to build anyway.'
 --- !u!114 &114651348136131822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -837,6 +861,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adcd8f9a9b60f0409604df9836c85ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114792673679962122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440932109127320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 38fe7be68a9966244827656eaf2d7728, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 217
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'WARNING: RUNNING OUT OF POWER'
 --- !u!114 &114826959438457800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -999,6 +1056,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390532114828136}
+--- !u!222 &222700634553454738
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440932109127320}
 --- !u!222 &222797630837456232
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1132,8 +1195,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -202, y: -82}
-  m_SizeDelta: {x: 400, y: 179}
+  m_AnchoredPosition: {x: -200, y: 0}
+  m_SizeDelta: {x: 400, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224298048626001696
 RectTransform:
@@ -1222,9 +1285,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 224777991885600686}
+  - {fileID: 224827260063887452}
   - {fileID: 224298048626001696}
   - {fileID: 224222791585813960}
+  - {fileID: 224777991885600686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1276,17 +1340,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503398021334256}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224467521612303450}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 169}
-  m_SizeDelta: {x: 400, y: 179}
+  m_AnchoredPosition: {x: 9, y: 185}
+  m_SizeDelta: {x: 850, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224784386122486530
 RectTransform:
@@ -1303,7 +1367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 398, y: -112}
+  m_AnchoredPosition: {x: 6365, y: -112}
   m_SizeDelta: {x: 400, y: 179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224803592424520724
@@ -1324,6 +1388,24 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -34.5, y: -0.7}
   m_SizeDelta: {x: 50.4, y: 30.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224827260063887452
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440932109127320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224467521612303450}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 169}
+  m_SizeDelta: {x: 400, y: 179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224853393954814106
 RectTransform:

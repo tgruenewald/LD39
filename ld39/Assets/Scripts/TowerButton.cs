@@ -9,19 +9,21 @@ public class TowerButton : MonoBehaviour {
 	public GameObject towerIcon;
 	public GameObject towerPrefab;
 
-
+	public Text buildingWarningText;
 	public Text cancelText;
 
 	private Vector3 mousePos;
 	public float moveSpeed = 0.1f;
 	public bool moveTower = false;
 	public bool creating = false;
+	public bool dangerousBuild = false;
 
+	public int towerCost = 100;
 	public GameObject placingTowerIcon = null;
 	// Use this for initialization
 
 	void Start () {
-		
+		cancelText.text = "To cancel, press space bar.\nTower Cost: " + towerCost + " Power";
 	}
 	
 	// Update is called once per frame
@@ -34,9 +36,31 @@ public class TowerButton : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (creating && GetComponent<GameManager>().fortressPower >= 100)
+			if (creating)
 			{
-				PlaceTower ();
+				//if building would be dangerous
+				if(GetComponent<GameManager>().fortressPower < towerCost){
+				//	buildingWarningText.text = "Not enough Power to build!";
+				//	buildingWarningText.enabled = true;
+
+				} 
+				else if (dangerousBuild)
+				{
+					dangerousBuild = false;
+					PlaceTower ();
+				}
+				else if ((GetComponent<GameManager>().fortressPower-towerCost) <= GetComponent<GameManager>().warningLevel)
+				{
+					buildingWarningText.text = "POWER WILL BE DANGEROUSLY LOW!\n To build anyway, click again.";
+					buildingWarningText.enabled = true;
+					dangerousBuild = true;
+				}
+				else{
+					PlaceTower ();
+
+				}
+				//if building would end game
+				//else
 				//Debug.Log ("tower placed");
 			}
 			//moveTower = true;
@@ -44,6 +68,8 @@ public class TowerButton : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
+			dangerousBuild = false;
+			buildingWarningText.enabled = false;
 			CancelTower ();
 		}
 
@@ -66,6 +92,7 @@ public class TowerButton : MonoBehaviour {
 	void PlaceTower ()
 	{
 		CreateTower (Input.mousePosition);
+		buildingWarningText.enabled = false;
 		cancelText.enabled = false;
 		creating = false;
 	}
@@ -75,7 +102,7 @@ public class TowerButton : MonoBehaviour {
 		RaycastHit hit = RayFromCamera(mousePosition, 1000.0f);
 		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
 		GameObject.Instantiate(towerPrefab, placingTowerIcon.transform.position, Quaternion.identity);
-		GetComponent<GameManager> ().fortressPower -= 100;
+		GetComponent<GameManager> ().fortressPower -= towerCost;
 		Destroy (placingTowerIcon);
 	}
 
@@ -87,12 +114,16 @@ public class TowerButton : MonoBehaviour {
 
 	public void CreateTowerIcon(Vector2 mousePosition)
 	{
-
-
 		RaycastHit hit = RayFromCamera(mousePosition, 1000.0f);
 		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
 		placingTowerIcon = Instantiate(towerIcon, objectPos, Quaternion.identity) as GameObject;
 		creating = true;
+
+		if(GetComponent<GameManager>().fortressPower < towerCost){
+			buildingWarningText.text = "Not enough Power to build!";
+			buildingWarningText.enabled = true;
+
+		} 
 	}
 
 	public RaycastHit RayFromCamera(Vector3 mousePosition, float rayLength)

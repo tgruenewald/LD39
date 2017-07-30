@@ -126,7 +126,7 @@ public class Tower : MonoBehaviour {
 
 		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
 		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
-		superTextPos = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
+		superTextPos = new Vector3 (barPosition.x, barPosition.y + 20, transform.position.z);
 
 
 		newBar.transform.SetParent (canvas);
