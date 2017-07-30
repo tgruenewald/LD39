@@ -7,6 +7,9 @@ TagManager:
   - Grunt
   - marker
   - wind
+  - tower menu
+  - AutoButton
+  - RedirectButton
   layers:
   - Default
   - TransparentFX

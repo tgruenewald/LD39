@@ -15,6 +15,9 @@ public class Tower : MonoBehaviour {
 	//int powhold;
 	//public GameObject HOLD;
 	// Use this for initialization
+
+
+
 	void Start () {
 		power = startpower;
 		// bullet.transform.position = transform.position;
@@ -28,7 +31,7 @@ public class Tower : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (power <= 0) {
-			Debug.Log ("Reloading");
+			//Debug.Log ("Reloading");
 		}
 		else{
 			
@@ -83,8 +86,6 @@ public class Tower : MonoBehaviour {
 		}
 	}
 
-	void OnMouseEnter(){
-			towerMenu.SetActive(true);
-	}
+
 
 }
