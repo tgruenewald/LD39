@@ -98,12 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerButton: {fileID: 0}
-  towerPrefab: {fileID: 1747901003981512, guid: 898aedbc695489f4389b5997d39ae720,
-    type: 2}
+  towerPrefab: {fileID: 0}
   moveSpeed: 0.1
   moveTower: 0
-  isTouching: 0
-  maxDistance: 5
 --- !u!212 &212018897440564340
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -136,7 +133,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 299ed970cde408347bf3c2821c54ab7a, type: 3}
-  m_Color: {r: 0.33823532, g: 1, b: 0.5344829, a: 1}
+  m_Color: {r: 0.8308824, g: 0.39100346, b: 0.39100346, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212982499717755746
