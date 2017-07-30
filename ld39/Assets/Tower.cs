@@ -72,8 +72,9 @@ public class Tower : MonoBehaviour {
 						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 
 
-						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
-							Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
+						//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
+						bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target.transform.position, bulletSpeed);
+						    Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
 							bullet.GetComponent<Bullet>().origTargetVelocity = targetVelocity;
 							bullet.GetComponent<Bullet>().origTarget = target;
 							bullet.GetComponent<Bullet>().speed = bulletSpeed;

@@ -27,6 +27,7 @@ public class ShootUtil {
 		float c = Mathf.Pow (Vector3.Distance (targetPosition, startingPosition.position),2);
 		float d = -b / (2f * a);
 		float e = Mathf.Sqrt (Mathf.Pow (b,2) - 4f * a * c) / (2f * a);
+			Debug.Log("e is " + e);
 		float t1 = d - e;
 		float t2 = d + e;
 		float t = (t1 > t2 && t2 > 0f) ? t2 : t1;
