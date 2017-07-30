@@ -93,6 +93,7 @@ MonoBehaviour:
   speed: 0.1
   nextTargetIndex: 0
   inRange: 0
+  health: 10
 --- !u!120 &120398347853724528
 LineRenderer:
   m_ObjectHideFlags: 1
