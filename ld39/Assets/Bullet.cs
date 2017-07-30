@@ -27,9 +27,8 @@ public class Bullet : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "Grunt") {
-			Destroy (coll.gameObject);
-			Destroy (this.gameObject);			
+			GameObject.FindWithTag ("Grunt").GetComponent<Grunt> ().health--;
+			Destroy (this.gameObject);	
 		}
-
 	}
 }
