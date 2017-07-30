@@ -10,17 +10,30 @@ public class Tower : MonoBehaviour {
 	private bool alreadyFired = false;
 
 	public int power;
-	public int startpower;
+	public int startpower = 100;
 	public int maxpower;
 	int powhold;
 
 	// Use this for initialization
-
-
+	public Transform canvas;
+	public Slider towerEnergyBar;
+	Slider newBar;
+	Vector3 barPosition;
 
 	void Start () {
 		power = startpower;
+
+		CreateEnergyBar ();
+
+
 		// bullet.transform.position = transform.position;
+	}
+
+	void Awake()
+	{
+		canvas = GameObject.Find("Canvas").transform;
+
+
 	}
 	IEnumerator waitForNextShoot() {
 		yield return new WaitForSeconds(1f);
@@ -63,17 +76,13 @@ public class Tower : MonoBehaviour {
 					}				
 								
 			}
-			catch (MissingReferenceException e) {
-				targetList.Dequeue ();
-			}
-
-		}
 		}
 		 if(power > maxpower) {
 			powhold = power - maxpower;
 			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
 			power = maxpower;
 		}
+		newBar.value = power;
 
 	}
 	void OnTriggerEnter2D(Collider2D coll){
@@ -95,7 +104,17 @@ public class Tower : MonoBehaviour {
 		GetComponent<Collider2D> ().enabled = false;
 	}
 
+	void CreateEnergyBar(){
+		barPosition = Camera.main.WorldToScreenPoint (transform.position);
+		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
 
+		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
+
+		newBar.transform.SetParent (canvas);
+
+		newBar.value = startpower;
+		newBar.maxValue = startpower * 2;
+	}
 
 
 

@@ -143,8 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 3.5
   power: 0
-  startpower: 0
+  startpower: 100
   maxpower: 0
+  canvas: {fileID: 0}
+  towerEnergyBar: {fileID: 114967000358998848, guid: 6f73df249015c63499e1d7af5b1bc192,
+    type: 2}
 --- !u!114 &114761022062347236
 MonoBehaviour:
   m_ObjectHideFlags: 1
