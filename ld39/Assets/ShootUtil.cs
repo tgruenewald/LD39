@@ -31,7 +31,7 @@ public class ShootUtil {
 		float t2 = d + e;
 		float t = (t1 > t2 && t2 > 0f) ? t2 : t1;
 		Vector3 bulletVelocity = (targetPosition + new Vector3 (targetVelocity.x, targetVelocity.y) * t - startingPosition.position)/t;
-		Debug.Log ("firing");
+
 		//			Debug.Log (targetVelocity);
 		//			Debug.Log (targetPosition);
 		//			Debug.Log (a);

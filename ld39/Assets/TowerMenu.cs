@@ -33,18 +33,16 @@ public class TowerMenu : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		Debug.Log ("mouse entered tower collision zone");
-
-
 		autoButton.gameObject.SetActive (true);
 		redirectButton.gameObject.SetActive (true);
-
+		GetComponentInParent<Tower> ().mouseCounter++;
 		towerMenu.transform.position = new Vector3 (iconMenuPosition.x, iconMenuPosition.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 	}
 
 	void OnMouseExit(){
-		GetComponentInParent<CircleCollider2D> ().enabled = true;
+		GetComponentInParent<Tower> ().mouseCounter--;
+		Debug.Log ("mouse exiting tower collision zone");
 		towerMenu.transform.position = new Vector3 (3000,3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 	}
