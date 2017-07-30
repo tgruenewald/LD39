@@ -7,20 +7,21 @@ public class GameManager : MonoBehaviour {
 	public int fortressPower = 1000;
 	public int depletionRate = 25;
 	public int numberOfTowers = 1;
-
+	public int warningLevel = 250;
 	public Text warningText;
 	public Text powerAmountText;
 	public string warningString;
+	public Slider energyBar;
 
 	void Start(){
 		StartCoroutine (BlinkText ());
-
-
 		StartCoroutine (NaturalDepletion());
+
+		energyBar.value = 1000;
 	}
 	void Update(){
 
-		if (fortressPower <= 100)
+		if (fortressPower <= warningLevel)
 		{
 			warningText.enabled = true;
 			warningString = "WARNING: RUNNING OUT OF POWER";
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		powerAmountText.text = "Main Power: " + fortressPower;
+		UpdateEnergyBar ();
 
 	}//Update
 
@@ -54,6 +56,17 @@ public class GameManager : MonoBehaviour {
 			fortressPower -= 1;
 			yield return new WaitForSeconds (1f/(depletionRate * numberOfTowers));
 		}
+	}
+
+	public void UpdateEnergyBar(){
+		energyBar.value = fortressPower;
+		/*if(energyBar.value < 100){
+			energyBar.color = Color.Lerp (Color.red, Color.white, Mathf.PingPong (Time.time, 1f));
+		}
+		else{
+			energyBar.image.color = Color.Lerp (Color.red, Color.blue, energyBar.value);
+
+		}*/
 	}
 
 	public void GameOver(){

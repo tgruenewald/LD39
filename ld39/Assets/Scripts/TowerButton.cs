@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TowerButton : MonoBehaviour {
 
 	public GameObject towerIcon;
 	public GameObject towerPrefab;
+
+
+	public Text cancelText;
+
 	private Vector3 mousePos;
 	public float moveSpeed = 0.1f;
 	public bool moveTower = false;
@@ -32,9 +37,14 @@ public class TowerButton : MonoBehaviour {
 			if (creating && GetComponent<GameManager>().fortressPower >= 100)
 			{
 				PlaceTower ();
-				Debug.Log ("tower placed");
+				//Debug.Log ("tower placed");
 			}
 			//moveTower = true;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			CancelTower ();
 		}
 
 	}
@@ -49,13 +59,14 @@ public class TowerButton : MonoBehaviour {
 			
 		else {
 			CreateTowerIcon (Input.mousePosition);
-
+			cancelText.enabled = true;
 		}
 	}
 
 	void PlaceTower ()
 	{
 		CreateTower (Input.mousePosition);
+		cancelText.enabled = false;
 		creating = false;
 	}
 
@@ -68,8 +79,16 @@ public class TowerButton : MonoBehaviour {
 		Destroy (placingTowerIcon);
 	}
 
+	public void CancelTower(){
+		creating = false;
+		Destroy (placingTowerIcon);
+		cancelText.enabled = false;
+	}
+
 	public void CreateTowerIcon(Vector2 mousePosition)
 	{
+
+
 		RaycastHit hit = RayFromCamera(mousePosition, 1000.0f);
 		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
 		placingTowerIcon = Instantiate(towerIcon, objectPos, Quaternion.identity) as GameObject;
