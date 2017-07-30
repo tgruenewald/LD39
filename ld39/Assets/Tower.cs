@@ -10,17 +10,30 @@ public class Tower : MonoBehaviour {
 	private bool alreadyFired = false;
 
 	public int power;
-	public int startpower;
+	public int startpower = 100;
 	public int maxpower;
 	//int powhold;
 	//public GameObject HOLD;
 	// Use this for initialization
-
-
+	public Transform canvas;
+	public Slider towerEnergyBar;
+	Slider newBar;
+	Vector3 barPosition;
 
 	void Start () {
 		power = startpower;
+
+		CreateEnergyBar ();
+
+
 		// bullet.transform.position = transform.position;
+	}
+
+	void Awake()
+	{
+		canvas = GameObject.Find("Canvas").transform;
+
+
 	}
 	IEnumerator waitForNextShoot() {
 		yield return new WaitForSeconds(1f);
@@ -35,33 +48,35 @@ public class Tower : MonoBehaviour {
 		}
 		else{
 			
-				if (targetList.Count > 0) {
-			var grunt = targetList.Peek ();
-			try {
-				if (!grunt.GetComponent<Grunt>().inRange) {
+			if (targetList.Count > 0) {
+				var grunt = targetList.Peek ();
+				try {
+					if (!grunt.GetComponent<Grunt>().inRange) {
+						targetList.Dequeue ();
+					}
+					else {
+						if (targetList.Count > 0 && !alreadyFired) {
+							target = targetList.Dequeue ();
+							alreadyFired = true;
+							StartCoroutine (waitForNextShoot ());
+								power--;
+							GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+
+							Debug.Log ("firing");
+
+							bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
+
+						}				
+					}				
+				}
+				catch (MissingReferenceException e) {
 					targetList.Dequeue ();
 				}
-				else {
-					if (targetList.Count > 0 && !alreadyFired) {
-						target = targetList.Dequeue ();
-						alreadyFired = true;
-						StartCoroutine (waitForNextShoot ());
-							power--;
-						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 
-						Debug.Log ("firing");
-
-						bullet.GetComponent<Rigidbody2D> ().velocity = ShootUtil.firingVector (transform, target, bulletSpeed);
-
-					}				
-				}				
 			}
-			catch (MissingReferenceException e) {
-				targetList.Dequeue ();
-			}
+		}
 
-		}
-		}
+		newBar.value = power;
 		// (power > maxpower) {
 			//powhold = power - maxpower;
 			//GameObject.Find (HOLD).GetComponent<> ();
@@ -90,7 +105,17 @@ public class Tower : MonoBehaviour {
 		GetComponent<Collider2D> ().enabled = false;
 	}
 
+	void CreateEnergyBar(){
+		barPosition = Camera.main.WorldToScreenPoint (transform.position);
+		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
 
+		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
+
+		newBar.transform.SetParent (canvas);
+
+		newBar.value = startpower;
+		newBar.maxValue = startpower * 2;
+	}
 
 
 
