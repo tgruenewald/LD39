@@ -8,6 +8,9 @@ TagManager:
   - marker
   - wind
   - rock
+  - tower menu
+  - AutoButton
+  - RedirectButton
   layers:
   - Default
   - TransparentFX
