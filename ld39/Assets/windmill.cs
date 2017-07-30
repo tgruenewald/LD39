@@ -16,9 +16,9 @@ public class windmill : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D coll){
 		if (coll.gameObject.tag == "wind") {
-			Debug.Log ("i nedd");
+
 			GetComponentInParent<Tower> ().power++;
-			Debug.Log ("help");
+
 		}
 			
 	}
