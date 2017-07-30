@@ -23,10 +23,9 @@ GameObject:
   - component: {fileID: 114175536098909084}
   - component: {fileID: 58481272962665474}
   - component: {fileID: 50985065215421594}
-  - component: {fileID: 114972533227777866}
   m_Layer: 8
   m_Name: rocky
-  m_TagString: rock
+  m_TagString: Grunt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1838560017715134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4703293, y: -2.437952, z: 0}
+  m_LocalPosition: {x: -10.061207, y: -2.8440723, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,20 +93,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 3.1
+  speed: 1.51
   nextTargetIndex: 0
   inRange: 0
---- !u!114 &114972533227777866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1838560017715134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8151223e7dbf5b4680541e915b4a65d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  health: 20
 --- !u!212 &212469671412785820
 SpriteRenderer:
   m_ObjectHideFlags: 1

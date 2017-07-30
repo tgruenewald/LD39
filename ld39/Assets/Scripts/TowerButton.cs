@@ -29,7 +29,7 @@ public class TowerButton : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (creating)
+			if (creating && GetComponent<GameManager>().fortressPower >= 100)
 			{
 				PlaceTower ();
 				Debug.Log ("tower placed");
@@ -64,6 +64,7 @@ public class TowerButton : MonoBehaviour {
 		RaycastHit hit = RayFromCamera(mousePosition, 1000.0f);
 		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
 		GameObject.Instantiate(towerPrefab, placingTowerIcon.transform.position, Quaternion.identity);
+		GetComponent<GameManager> ().fortressPower -= 100;
 		Destroy (placingTowerIcon);
 	}
 
