@@ -12,6 +12,7 @@ TagManager:
   - RedirectButton
   - tower_menu
   - tower_meredith
+  - supercharge
   layers:
   - Default
   - TransparentFX

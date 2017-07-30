@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887334454205262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4779057401973222}
@@ -142,12 +142,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 3.5
-  power: 0
+  power: -46
   startpower: 100
-  maxpower: 0
+  maxpower: 200
   canvas: {fileID: 0}
   towerEnergyBar: {fileID: 114967000358998848, guid: 6f73df249015c63499e1d7af5b1bc192,
     type: 2}
+  superchargeText: {fileID: 0}
 --- !u!114 &114761022062347236
 MonoBehaviour:
   m_ObjectHideFlags: 1
