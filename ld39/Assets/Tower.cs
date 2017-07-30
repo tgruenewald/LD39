@@ -76,6 +76,7 @@ public class Tower : MonoBehaviour {
 			}
 		}
 
+
 		newBar.value = power;
 		// (power > maxpower) {
 			//powhold = power - maxpower;
