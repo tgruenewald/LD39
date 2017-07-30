@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 95776165822929712}
   m_Layer: 0
   m_Name: tower_meredith
-  m_TagString: tower_meredith
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114761022062347236}
   m_Layer: 0
   m_Name: towerMenuCollider
-  m_TagString: Untagged
+  m_TagString: tower_meredith
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

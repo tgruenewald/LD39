@@ -17,13 +17,13 @@ public class TowerButton : MonoBehaviour {
 	public bool moveTower = false;
 	public bool creating = false;
 	public bool dangerousBuild = false;
-
+	public bool creatingDisabled = false;
 	public int towerCost = 100;
 	public GameObject placingTowerIcon = null;
 	// Use this for initialization
 
 	void Start () {
-		cancelText.text = "To cancel, press space bar.\nTower Cost: " + towerCost + " Power";
+		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
 	}
 	
 	// Update is called once per frame
@@ -40,10 +40,15 @@ public class TowerButton : MonoBehaviour {
 			{
 				//if building would be dangerous
 				if(GetComponent<GameManager>().fortressPower < towerCost){
-				//	buildingWarningText.text = "Not enough Power to build!";
+					buildingWarningText.text = "Not enough Power to build!";
 				//	buildingWarningText.enabled = true;
 
-				} 
+				}
+				else if(creatingDisabled)
+				{
+					buildingWarningText.enabled = true;
+					buildingWarningText.text = "Invalid place to build tower.";
+				}
 				else if (dangerousBuild)
 				{
 					dangerousBuild = false;
@@ -85,7 +90,7 @@ public class TowerButton : MonoBehaviour {
 			
 		else {
 			CreateTowerIcon (Input.mousePosition);
-			cancelText.enabled = true;
+			cancelText.text = "To cancel, press space bar.\nTower Cost: " + towerCost + " Power";
 		}
 	}
 
@@ -93,7 +98,7 @@ public class TowerButton : MonoBehaviour {
 	{
 		CreateTower (Input.mousePosition);
 		buildingWarningText.enabled = false;
-		cancelText.enabled = false;
+		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
 		creating = false;
 	}
 
@@ -109,7 +114,7 @@ public class TowerButton : MonoBehaviour {
 	public void CancelTower(){
 		creating = false;
 		Destroy (placingTowerIcon);
-		cancelText.enabled = false;
+		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
 	}
 
 	public void CreateTowerIcon(Vector2 mousePosition)

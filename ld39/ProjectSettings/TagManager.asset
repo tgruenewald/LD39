@@ -13,6 +13,7 @@ TagManager:
   - tower_menu
   - tower_meredith
   - supercharge
+  - border
   layers:
   - Default
   - TransparentFX

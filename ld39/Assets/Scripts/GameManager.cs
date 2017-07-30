@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 	public int fortressPower = 1000;
-	public int depletionRate = 25;
+	public int depletionRate = 15;
 	public int numberOfTowers = 1;
 	public int warningLevel = 250;
 	public Text warningText;

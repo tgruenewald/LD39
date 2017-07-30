@@ -10,7 +10,9 @@ public class TowerIcon : MonoBehaviour {
 	public float moveSpeed = 0.1f;
 	public bool moveTower = false;
 	public bool isTouching = false;
-	public float maxDistance = 5;
+	public float maxDistance = 1;
+
+	public int collisionCount = 0;
 
 	//public Transform towerIconTransform;
 	void Awake() {
@@ -22,36 +24,66 @@ public class TowerIcon : MonoBehaviour {
 
 	}
 
+
 	// Update is called once per frame
 	void Update () {
-		
+		if (collisionCount == 0)
+		{
+			GameObject.Find ("Canvas").GetComponent<TowerButton> ().creatingDisabled = false;
+			isTouching = true;
+
+		}
+		else
+		{
+			GameObject.Find ("Canvas").GetComponent<TowerButton> ().creatingDisabled = true;
+			isTouching = false;
+
+		}
+			
 	}
 
-	void OnTriggerStay2D(Collider2D other)
+	/*void OnTriggerStay2D(Collider2D other)
 	{
-		Debug.Log ("touched2");
 		if (Vector3.Distance(other.transform.position,this.transform.position) < maxDistance)
 		{
-			isTouching = true;
 			Debug.Log ("touched");
+			if (other.gameObject.tag == "tower_meredith" || other.gameObject.tag == "border") {
+				isTouching = true;
+				GameObject.Find ("Canvas").GetComponent<TowerButton> ().creatingDisabled = true;
+
+			}
+
 		}
 		else{
-			isTouching = false;
+			if (other.gameObject.tag == "tower_meredith" || other.gameObject.tag == "border") {
+				isTouching = false;
+
+			}
+
 		}
-	}
+	}*/
 
 	void OnTriggerEnter2D(Collider2D coll){
-		
-		if (coll.gameObject.tag == "tower_meredith") {
-			Debug.Log ("collision with tower");
+
+		//gameObject.GetComponent<SpriteRenderer> ().material.color = new Color32(255,255,255,150);
+		Debug.Log(coll.gameObject.tag);
+
+		if (coll.gameObject.tag == "tower_meredith" || coll.gameObject.tag == "border") {
+			collisionCount++;
+
+
 		}
 	
 	}
 
 	void OnTriggerExit2D(Collider2D coll){
-		if (coll.gameObject.tag == "tower_meredith") {
-			Debug.Log ("leaving collision w/ tower");
+
+		//gameObject.GetComponent<SpriteRenderer> ().material.color = Color.green;
+		if (coll.gameObject.tag == "tower_meredith"|| coll.gameObject.tag == "border") {
+			collisionCount--;
 		}
+		Debug.Log ("exit collision "+ coll.gameObject.tag);
+
 	}
 
 
