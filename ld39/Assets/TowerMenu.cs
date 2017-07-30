@@ -44,7 +44,7 @@ public class TowerMenu : MonoBehaviour {
 	}
 
 	void OnMouseExit(){
-		GetComponentInParent<Collider2D> ().enabled = true;
+		GetComponentInParent<CircleCollider2D> ().enabled = true;
 		towerMenu.transform.position = new Vector3 (3000,3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 	}
