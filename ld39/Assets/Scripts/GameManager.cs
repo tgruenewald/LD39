@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	public int fortressPower = 1000;
 	public int depletionRate = 25;
 	public int numberOfTowers = 1;
-
+	public int warningLevel = 250;
 	public Text warningText;
 	public Text powerAmountText;
 	public string warningString;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 	}
 	void Update(){
 
-		if (fortressPower <= 100)
+		if (fortressPower <= warningLevel)
 		{
 			warningText.enabled = true;
 			warningString = "WARNING: RUNNING OUT OF POWER";
