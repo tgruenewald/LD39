@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1747901003981512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.98, y: 0.18, z: 0}
+  m_LocalPosition: {x: -7.64, y: 4.14, z: 0}
   m_LocalScale: {x: 0.50750273, y: 0.4703098, z: 0.7758233}
   m_Children:
   - {fileID: 4741158583935446}
@@ -145,9 +145,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.06, y: -0.15}
   serializedVersion: 2
-  m_Radius: 0.98536205
+  m_Radius: 1.1729848
 --- !u!58 &58972394683051400
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -198,6 +198,7 @@ MonoBehaviour:
   towerEnergyBar: {fileID: 114967000358998848, guid: 6f73df249015c63499e1d7af5b1bc192,
     type: 2}
   superchargeText: {fileID: 0}
+  mouseCounter: 0
 --- !u!114 &114669966716504810
 MonoBehaviour:
   m_ObjectHideFlags: 1

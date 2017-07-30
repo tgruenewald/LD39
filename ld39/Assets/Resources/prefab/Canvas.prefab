@@ -427,7 +427,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 299ed970cde408347bf3c2821c54ab7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10b4c655958bc8f46beb7fde19c7c461, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1859955172173548}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -581,7 +581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: 'To cancel, press the space bar.
+  m_Text: '<-- Click to build a tower.
 
     Tower Cost: 100 Power'
 --- !u!114 &114427258506114620
@@ -637,6 +637,7 @@ MonoBehaviour:
   moveTower: 0
   creating: 0
   dangerousBuild: 0
+  creatingDisabled: 0
   towerCost: 100
   placingTowerIcon: {fileID: 0}
 --- !u!114 &114452427525429576
@@ -1195,7 +1196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: -235, y: 0}
   m_SizeDelta: {x: 400, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224298048626001696
@@ -1218,8 +1219,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50.5}
-  m_SizeDelta: {x: 13, y: 100}
+  m_AnchoredPosition: {x: 0, y: 47}
+  m_SizeDelta: {x: 0, y: 94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224353620868496708
 RectTransform:
@@ -1254,7 +1255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 351, y: -82}
+  m_AnchoredPosition: {x: 351, y: -89.5}
   m_SizeDelta: {x: 400, y: 179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224447166846149972
@@ -1331,7 +1332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -436, y: 0}
+  m_AnchoredPosition: {x: -430.8, y: 0}
   m_SizeDelta: {x: 86, y: 88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224777991885600686
@@ -1443,7 +1444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: 29}
+  m_AnchoredPosition: {x: 275, y: 18.5}
   m_SizeDelta: {x: 389, y: 51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224976597204139260

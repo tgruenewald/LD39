@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1981003097284978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.91, y: 3.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5075027, y: 0.4703098, z: 0.7758233}
   m_Children:
   - {fileID: 4874220863760742}
   m_Father: {fileID: 0}
@@ -104,9 +104,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.04, y: -0.15}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.38
 --- !u!114 &114825066570400368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +125,7 @@ MonoBehaviour:
   moveTower: 0
   isTouching: 0
   maxDistance: 5
+  collisionCount: 0
 --- !u!212 &212082557499778946
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -191,7 +192,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 299ed970cde408347bf3c2821c54ab7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94c54e63b7cd81240bbc0662ee46d6a5, type: 3}
   m_Color: {r: 0.6430021, g: 1, b: 0.5294118, a: 1}
   m_FlipX: 0
   m_FlipY: 0
