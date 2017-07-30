@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 58972394683051400}
   m_Layer: 0
   m_Name: tower_meredith
-  m_TagString: Untagged
+  m_TagString: tower_meredith
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1659491938762680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32, y: -0.82, z: 0}
+  m_LocalPosition: {x: 0.107, y: -0.023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4779057401973222}
@@ -129,7 +129,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.253563
+  m_Radius: 2.825141
 --- !u!114 &114594673563119056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,10 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9653a5436a9739449a74ba3f37c609e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoButton: {fileID: 0}
-  redirectButton: {fileID: 0}
   iconMenuPos: {fileID: 1659491938762680}
   iconMenuPosition: {x: 0, y: 0, z: 0}
+  autoButton: {fileID: 0}
+  redirectButton: {fileID: 0}
+  towerMenu: {fileID: 0}
 --- !u!212 &212531847798257532
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -92,6 +92,11 @@ public class Tower : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
+		GetComponent<Collider2D> ().enabled = false;
 	}
+
+
+
+
 
 }
