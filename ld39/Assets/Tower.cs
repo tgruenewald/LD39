@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour {
 	private bool alreadyFired = false;
 
 	public int power;
-	public int startpower = 100;
+	public int startpower;
 	public int maxpower;
 	int powhold;
 
@@ -23,12 +23,9 @@ public class Tower : MonoBehaviour {
 	Vector3 superTextPos;
 	public GameObject superchargeText;
 
+
 	void Start () {
 		power = startpower;
-
-		CreateEnergyBar ();
-
-
 		// bullet.transform.position = transform.position;
 	}
 
@@ -39,6 +36,7 @@ public class Tower : MonoBehaviour {
 
 
 	}
+
 	IEnumerator waitForNextShoot() {
 		yield return new WaitForSeconds(1f);
 		alreadyFired = false;
@@ -48,7 +46,7 @@ public class Tower : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (power <= 0) {
-			//Debug.Log ("Reloading");
+			Debug.Log ("Reloading");
 		}
 		else{
 			
@@ -84,6 +82,7 @@ public class Tower : MonoBehaviour {
 				}								
 			}
 
+
 		}
 
 		if(power >= maxpower) {
@@ -96,7 +95,6 @@ public class Tower : MonoBehaviour {
 			superchargeText.transform.position = new Vector3 (3000,3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 		}
-		newBar.value = power;
 
 	}
 	void OnTriggerEnter2D(Collider2D coll){
@@ -115,7 +113,6 @@ public class Tower : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		GetComponent<Collider2D> ().enabled = false;
 	}
 
 
@@ -135,5 +132,6 @@ public class Tower : MonoBehaviour {
 		newBar.maxValue = startpower * 2;
 
 	}
+
 
 }
