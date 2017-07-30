@@ -26,6 +26,7 @@ public class Tower : MonoBehaviour {
 
 	void Start () {
 		power = startpower;
+
 		// bullet.transform.position = transform.position;
 	}
 
@@ -33,6 +34,7 @@ public class Tower : MonoBehaviour {
 	{
 		canvas = GameObject.Find("Canvas").transform;
 
+		CreateEnergyBar ();
 
 
 	}
@@ -119,11 +121,11 @@ public class Tower : MonoBehaviour {
 	void CreateEnergyBar(){
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
-		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
-		superTextPos = superchargeText.transform.position;
 
 
 		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
+		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
+		superTextPos = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
 
 
 		newBar.transform.SetParent (canvas);
