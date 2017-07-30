@@ -20,6 +20,7 @@ public class Tower : MonoBehaviour {
 	public Slider towerEnergyBar;
 	Slider newBar;
 	Vector3 barPosition;
+	Vector3 superTextPos;
 	public GameObject superchargeText;
 
 	void Start () {
@@ -83,10 +84,15 @@ public class Tower : MonoBehaviour {
 				}								
 			}
 		}
-		if(power > maxpower) {
+		if(power >= maxpower) {
 			powhold = power - maxpower;
 			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
 			power = maxpower;
+			superchargeText.transform.position = new Vector3 (superTextPos.x, superTextPos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+		}
+		else{
+			superchargeText.transform.position = new Vector3 (3000,3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+
 		}
 		newBar.value = power;
 
@@ -113,6 +119,7 @@ public class Tower : MonoBehaviour {
 	void CreateEnergyBar(){
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
+		superTextPos = superchargeText.transform.position;
 
 
 		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
@@ -123,7 +130,6 @@ public class Tower : MonoBehaviour {
 		newBar.maxValue = startpower * 2;
 
 		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
-	
 	}
 
 }

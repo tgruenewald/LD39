@@ -643,15 +643,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 4087697676268222, guid: 898aedbc695489f4389b5997d39ae720, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 114594673563119056, guid: 898aedbc695489f4389b5997d39ae720,
-        type: 2}
-      propertyPath: power
-      value: -46
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 898aedbc695489f4389b5997d39ae720, type: 2}
   m_IsPrefabParent: 0
@@ -779,10 +770,10 @@ RectTransform:
   m_Father: {fileID: 824929863}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -259.5}
-  m_SizeDelta: {x: 971, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50.5}
+  m_SizeDelta: {x: 13, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547769757
 MonoBehaviour:
@@ -1045,9 +1036,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1183153870832100, guid: 6f73df249015c63499e1d7af5b1bc192, type: 2}
-      propertyPath: m_TagString
-      value: supercharge
+    - target: {fileID: 224488837785504190, guid: 6f73df249015c63499e1d7af5b1bc192,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224488837785504190, guid: 6f73df249015c63499e1d7af5b1bc192,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f73df249015c63499e1d7af5b1bc192, type: 2}
