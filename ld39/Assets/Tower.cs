@@ -122,6 +122,7 @@ public class Tower : MonoBehaviour {
 	void CreateEnergyBar(){
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
+		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
 		superTextPos = superchargeText.transform.position;
 
 
@@ -133,7 +134,6 @@ public class Tower : MonoBehaviour {
 		newBar.value = startpower;
 		newBar.maxValue = startpower * 2;
 
-		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
 	}
 
 }
