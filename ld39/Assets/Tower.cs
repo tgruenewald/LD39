@@ -83,11 +83,9 @@ public class Tower : MonoBehaviour {
 					targetList.Dequeue ();
 				}								
 			}
-catch (MissingReferenceException e) {
-			// just ignore
+
 		}
-		}
-		}
+
 		if(power >= maxpower) {
 			powhold = power - maxpower;
 			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
