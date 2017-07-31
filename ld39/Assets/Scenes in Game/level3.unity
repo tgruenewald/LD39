@@ -1539,6 +1539,11 @@ Prefab:
       propertyPath: waves.Array.data[3].maxEnemies
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 114163474917262376, guid: fd616da72b5e44a449407505e01bc4cb,
+        type: 2}
+      propertyPath: timeBetweenWaves
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd616da72b5e44a449407505e01bc4cb, type: 2}
   m_IsPrefabParent: 0
