@@ -72,8 +72,6 @@ public class Tower : MonoBehaviour
 			if (redirectMode) {
 				if (!alreadyFired) {
 					try {
-						Debug.Log(" gameObject.GetInstanceID" + gameObject.GetInstanceID());
-
 					alreadyFired = true;
 					StartCoroutine (waitForNextShoot ());
 					Debug.Log ("shooting wind");
@@ -99,7 +97,7 @@ public class Tower : MonoBehaviour
 
 					try {
 
-						while (targetList.Peek () != null && !targetList.Peek ().GetComponent<Grunt> ().inRange) {
+						while (targetList.Count > 0 && targetList.Peek () != null && !targetList.Peek ().GetComponent<Grunt> ().inRange) {
 							targetList.Dequeue ();
 						}
 				 
@@ -139,6 +137,7 @@ public class Tower : MonoBehaviour
 			superchargeText.transform.position = new Vector3 (3000, 3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 		}
+		newBar.value = power;
 
 	
 	}//Update

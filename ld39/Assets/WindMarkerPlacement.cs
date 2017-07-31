@@ -15,6 +15,7 @@ public class WindMarkerPlacement : MonoBehaviour {
 	void Update () {
 		if (!hasStarted && Input.GetMouseButtonDown(0)) {
 			hasStarted = true;
+			GetComponent<SpriteRenderer> ().enabled = false;
 			Debug.Log("WIND MARKER: mouse down");
 			GameObject[] selectedTowers;
 			selectedTowers = GameObject.FindGameObjectsWithTag("selected_tower");

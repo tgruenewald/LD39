@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerButton: {fileID: 0}
-  towerPrefab: {fileID: 1747901003981512, guid: 898aedbc695489f4389b5997d39ae720,
+  towerPrefab: {fileID: 1747901003981512, guid: b6f8bc633f2457e43adc0d488c1625e9,
     type: 2}
   moveSpeed: 0.1
   moveTower: 0

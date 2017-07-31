@@ -52,34 +52,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81618748f2c8874ca5f7e15c1ea78c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
-      type: 2}
-    maxEnemies: 4
-    spawnInterval: 1
-    enemySpeed: 3
-  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
-      type: 2}
-    maxEnemies: 4
-    spawnInterval: 1
-    enemySpeed: 3
+  waves: []
   timeBetweenWaves: 5
   currentWave: 0
   enemiesSpawned: 0
   timeToNextSpawn: 1
-  timeBeforeFirstWave: 2
+  timeBeforeFirstWave: 0
   beginWaves: 0
-  targetList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targetList: []
 --- !u!212 &212025412213805930
 SpriteRenderer:
   m_ObjectHideFlags: 1

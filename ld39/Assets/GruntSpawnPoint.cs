@@ -9,8 +9,8 @@ public class GruntSpawnPoint : MonoBehaviour {
 	{
 		public GameObject enemyPrefab;
 		public int maxEnemies;
-		public int spawnInterval;
-		public int enemySpeed;
+		public float spawnInterval;
+		public float enemySpeed;
 	}
 
 	public Wave[] waves;
@@ -83,7 +83,7 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 	}//Update
 
-	IEnumerator spawnTime(GameObject gruntPrefab, int gruntSpeed) {
+	IEnumerator spawnTime(GameObject gruntPrefab, float gruntSpeed) {
 		yield return new WaitForSeconds(timeToNextSpawn);
 		//StartCoroutine (spawnTime ());
 		var grunt = (GameObject) Instantiate(gruntPrefab, GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
