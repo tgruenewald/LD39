@@ -387,7 +387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 31, y: 18}
+  m_AnchoredPosition: {x: 31, y: 36}
   m_SizeDelta: {x: -363, y: -115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293051101
@@ -425,7 +425,8 @@ MonoBehaviour:
   m_Text: "Terry Gruenewald\t\t Project Lead/Coding\nMeredith Chen\t  \t\t Coding/Level
     Design\nThomas Gruenewald\t Coding\nJason Gruenewald\t\t Coding/Art\nJarkko Ahvenniemi\t
     \    Music\r\nHenna Ahvenniemi\t\t Art\r\nTamara Gruenewald\t Character Design\nMelissa
-    Gruenewald     Character Design\nNyefan\t\t \t\t   \t Physicist\n\n\n"
+    Gruenewald     Character Design\nLuke Collier\t\t\t\t Sound FX\nNyefan\t\t \t\t
+    \  \t Physicist\n\n\n"
 --- !u!222 &293051102
 CanvasRenderer:
   m_ObjectHideFlags: 0
