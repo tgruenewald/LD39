@@ -68,12 +68,13 @@ public class Tower : MonoBehaviour
 			Debug.Log ("Reloading");
 		} else {
 			if (redirectMode) {
-				Debug.Log("redirect mode");
 				if (!alreadyFired) {
 					try {
-					Debug.Log ("shooting wind");
+						Debug.Log(" gameObject.GetInstanceID" + gameObject.GetInstanceID());
+
 					alreadyFired = true;
 					StartCoroutine (waitForNextShoot ());
+					Debug.Log ("shooting wind");
 					power--;
 					Transform[] t = new Transform[1];
 					t [0] = windMarker[0].transform;
@@ -81,6 +82,7 @@ public class Tower : MonoBehaviour
 								
 					grunt.GetComponent<Wind> ().targetList = t; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
 					grunt.GetComponent<Wind> ().speed = 6f;
+					grunt.GetComponent<Wind> ().windId = gameObject.GetInstanceID();	;		
 					}
 					catch  {
 						// if anything goes wrong go back to automatic

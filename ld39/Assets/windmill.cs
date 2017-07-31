@@ -16,8 +16,12 @@ public class windmill : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D coll){
 		if (coll.gameObject.tag == "wind") {
-
-			GetComponentInParent<Tower> ().power++;
+			// put check here to not collect your own wind
+			Debug.Log("windmill gameObject.GetInstanceID" + gameObject.transform.parent.gameObject.GetInstanceID());
+			if (coll.gameObject.GetComponent<Wind> ().windId != gameObject.transform.parent.gameObject.GetInstanceID()) {
+				GetComponentInParent<Tower> ().power++;
+				DestroyObject (coll.gameObject);
+			}
 
 		}
 			
