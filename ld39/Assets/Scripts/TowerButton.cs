@@ -23,7 +23,7 @@ public class TowerButton : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power.\nHot keys: A - Automatic fire, D - direct wind";
+		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power.";
 	}
 	
 	// Update is called once per frame
