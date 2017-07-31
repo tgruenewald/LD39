@@ -140,7 +140,7 @@ public class Tower : MonoBehaviour
 
 		}
 
-	
+		newBar.value = power;
 	}//Update
 
 	void OnTriggerEnter2D (Collider2D coll)
