@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
 
 		}
 
-		if (!levelComplete)
+		if (!levelComplete && !gameOver)
 		{
 			if (Input.GetKeyDown (KeyCode.A)) {
 				Debug.Log ("You pressed A");
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour {
 	}//Update
 
 	public IEnumerator BlinkText(){
-		while (true)
+		while (!levelComplete && !gameOver)
 		{
 			warningText.text = "";
 			yield return new WaitForSeconds (.5f);
@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver(){
 		StopCoroutine ("NaturalDepletion");
+		Debug.Log ("Game Over");
 		warningString = "GAME OVER: YOU RAN OUT OF POWER";
 		fortressPower = 0;
 		gameOver = true;
