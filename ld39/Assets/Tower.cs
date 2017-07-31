@@ -59,6 +59,7 @@ public class Tower : MonoBehaviour
 			mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint (mousePos);
 			windMarkerPrefab.transform.position = new Vector3 (mousePos.x, mousePos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+		}
 
 		if (mouseCounter == 0) {
 			//Debug.Log ("Restoring outer collider");
@@ -139,7 +140,8 @@ public class Tower : MonoBehaviour
 
 		}
 
-	}
+	
+	}//Update
 
 	void OnTriggerEnter2D (Collider2D coll)
 	{
