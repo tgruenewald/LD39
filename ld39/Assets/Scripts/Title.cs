@@ -16,7 +16,7 @@ public class Title : MonoBehaviour {
 	}
 
 	public void clickStart() {
-		SceneManager.LoadScene ("tower_trial_meredith3");
+		SceneManager.LoadScene ("scene2");
 	}
 
 	public void clickCredits() {
