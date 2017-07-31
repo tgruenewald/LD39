@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour {
+public class Tower : MonoBehaviour
+{
 	Queue<GameObject> targetList = new Queue<GameObject> ();
 	GameObject target = null;
 	public float bulletSpeed = 6f;
@@ -24,116 +25,176 @@ public class Tower : MonoBehaviour {
 	public GameObject superchargeText;
 	public int mouseCounter = 0;
 
+	private Vector3 mousePos;
+	public GameObject windMarkerPrefab = null;
+	public bool creatingMode = false;
+	public bool redirectMode = false;
+	Transform[] windMarker;
 
-	void Start () {
+	void Start ()
+	{
 		power = startpower;
 
 		// bullet.transform.position = transform.position;
 	}
 
-	void Awake()
+	void Awake ()
 	{
-		canvas = GameObject.Find("Canvas").transform;
+		canvas = GameObject.Find ("Canvas").transform;
 
 		CreateEnergyBar ();
 
 
 	}
 
-	IEnumerator waitForNextShoot() {
-		yield return new WaitForSeconds(1f);
+	IEnumerator waitForNextShoot ()
+	{
+		yield return new WaitForSeconds (1f);
 		alreadyFired = false;
 
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+
+		if (windMarkerPrefab != null && creatingMode) {
+			mousePos = Input.mousePosition;
+			mousePos = Camera.main.ScreenToWorldPoint (mousePos);
+			windMarkerPrefab.transform.position = new Vector3 (mousePos.x, mousePos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+
+		}
 		if (mouseCounter == 0) {
 			Debug.Log ("Restoring outer collider");
 			GetComponent<Collider2D> ().enabled = true;
 		}
 		if (power <= 0) {
 			Debug.Log ("Reloading");
-		}
-		else{
+		} else {
+			if (redirectMode) {
+				Debug.Log("redirect mode");
+				if (!alreadyFired) {
+					Debug.Log ("shooting wind");
+					alreadyFired = true;
+					StartCoroutine (waitForNextShoot ());
+					power--;
+					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+
+					grunt.GetComponent<Wind> ().targetList = windMarker; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
+					grunt.GetComponent<Wind> ().speed = 1f;
+				}
 			
+			} else {
+				// automatic fire mode
 				if (targetList.Count > 0) {
 
-			try {
+					try {
 
-					while (!targetList.Peek ().GetComponent<Grunt>().inRange) {
-						targetList.Dequeue ();
-					}
+						while (!targetList.Peek ().GetComponent<Grunt> ().inRange) {
+							targetList.Dequeue ();
+						}
 				 
-					if (targetList.Count > 0 && !alreadyFired) {
-						target = targetList.Dequeue ();
-						alreadyFired = true;
-						StartCoroutine (waitForNextShoot ());
+						if (targetList.Count > 0 && !alreadyFired) {
+							target = targetList.Dequeue ();
+							alreadyFired = true;
+							StartCoroutine (waitForNextShoot ());
 							power--;
-						GameObject bullet = (GameObject)Instantiate(Resources.Load("prefab/bullet"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+							GameObject bullet = (GameObject)Instantiate (Resources.Load ("prefab/bullet"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
 
 
-						//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
-						bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target.transform.position, bulletSpeed);
-						    Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
-							bullet.GetComponent<Bullet>().origTargetVelocity = targetVelocity;
-							bullet.GetComponent<Bullet>().origTarget = target;
-							bullet.GetComponent<Bullet>().speed = bulletSpeed;
+							//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
+							bullet.transform.position = Vector3.MoveTowards (bullet.transform.position, target.transform.position, bulletSpeed);
+							Vector2 targetVelocity = target.GetComponent<Rigidbody2D> ().velocity;
+							bullet.GetComponent<Bullet> ().origTargetVelocity = targetVelocity;
+							bullet.GetComponent<Bullet> ().origTarget = target;
+							bullet.GetComponent<Bullet> ().speed = bulletSpeed;
 
 
 
 						}				
-					}				
-				catch (MissingReferenceException e) {
-					targetList.Dequeue ();
-				}								
+					} catch (MissingReferenceException e) {
+						targetList.Dequeue ();
+					}								
+				}
 			}
 
 
 		}
 
-		if(power >= maxpower) {
+		if (power >= maxpower) {
 			powhold = power - maxpower;
 			GameObject.Find ("Canvas").GetComponent<GameManager> ().fortressPower += powhold;
 			power = maxpower;
 			superchargeText.transform.position = new Vector3 (superTextPos.x, superTextPos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
-		}
-		else{
-			superchargeText.transform.position = new Vector3 (3000,3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
+		} else {
+			superchargeText.transform.position = new Vector3 (3000, 3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 		}
 
 	}
-	void OnTriggerEnter2D(Collider2D coll){
-        if (coll.gameObject.tag == "Grunt") {
-            Debug.Log("in range");
-		    targetList.Enqueue (coll.gameObject);
-			coll.gameObject.GetComponent<Grunt> ().inRange = true;
-        }
-	}
 
-	void OnTriggerExit2D(Collider2D coll){
+	void OnTriggerEnter2D (Collider2D coll)
+	{
 		if (coll.gameObject.tag == "Grunt") {
-			Debug.Log("out of range");
+			//Debug.Log ("in range");
+			targetList.Enqueue (coll.gameObject);
+			coll.gameObject.GetComponent<Grunt> ().inRange = true;
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D coll)
+	{
+		if (coll.gameObject.tag == "Grunt") {
+			//Debug.Log ("out of range");
 			coll.gameObject.GetComponent<Grunt> ().inRange = false;
 		}
 	}
 
-	void OnMouseEnter(){
+	void OnMouseEnter ()
+	{
 
 		Debug.Log ("mouse entering collider");
 		mouseCounter++;
 		GetComponent<Collider2D> ().enabled = false;
 	}
-	void OnMouseExit(){
+
+	void OnMouseExit ()
+	{
 		mouseCounter--;
 	}
 
-	void CreateEnergyBar(){
+	void OnMouseDown ()
+	{
+		CreateWindMarker (Input.mousePosition);
+	}
+
+	public void CreateWindMarker (Vector2 mousePosition)
+	{
+		creatingMode = true;
+		RaycastHit hit = RayFromCamera (mousePosition, 1000.0f);
+		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
+		windMarkerPrefab = (GameObject)GameObject.Instantiate (Resources.Load ("prefab/wind_redirect_marker"), transform.position, Quaternion.identity);
+		windMarkerPrefab.GetComponent<WindMarkerPlacement> ().origWindMill = gameObject;
+		windMarker = new Transform[1];
+
+		windMarker [0] = windMarkerPrefab.transform; 
+
+	}
+
+	public RaycastHit RayFromCamera (Vector3 mousePosition, float rayLength)
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay (mousePosition);
+		Physics.Raycast (ray, out hit, rayLength);
+		return hit;
+	}
+
+	void CreateEnergyBar ()
+	{
 		barPosition = Camera.main.WorldToScreenPoint (transform.position);
 		barPosition = new Vector3 (barPosition.x, barPosition.y + 30, transform.position.z);
 
 
-		newBar = GameObject.Instantiate(towerEnergyBar, barPosition, Quaternion.identity);
+		newBar = GameObject.Instantiate (towerEnergyBar, barPosition, Quaternion.identity);
 		superchargeText = newBar.transform.Find ("Supercharge Text").gameObject; 
 		superTextPos = new Vector3 (barPosition.x, barPosition.y + 20, transform.position.z);
 
@@ -143,6 +204,13 @@ public class Tower : MonoBehaviour {
 		newBar.value = startpower;
 		newBar.maxValue = startpower * 2;
 
+	}
+
+	void RedirectWind ()
+	{
+		var grunt = (GameObject)Instantiate (Resources.Load ("prefab/wind"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
+		grunt.GetComponent<Wind> ().targetList = gameObject.GetComponentInParent<WindSpawnPointParent> ().targetList;
+		grunt.GetComponent<Wind> ().speed = gameObject.GetComponentInParent<WindSpawnPointParent> ().windSpeed;
 	}
 
 
