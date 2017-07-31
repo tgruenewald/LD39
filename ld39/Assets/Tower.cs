@@ -70,16 +70,23 @@ public class Tower : MonoBehaviour
 			if (redirectMode) {
 				Debug.Log("redirect mode");
 				if (!alreadyFired) {
+					try {
 					Debug.Log ("shooting wind");
 					alreadyFired = true;
 					StartCoroutine (waitForNextShoot ());
 					power--;
-					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 					Transform[] t = new Transform[1];
 					t [0] = windMarker[0].transform;
-						
+					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+								
 					grunt.GetComponent<Wind> ().targetList = t; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
 					grunt.GetComponent<Wind> ().speed = 6f;
+					}
+					catch  {
+						// if anything goes wrong go back to automatic
+						redirectMode = false;
+						windMarker = null;
+					}
 				}
 			
 			} else {
@@ -88,7 +95,7 @@ public class Tower : MonoBehaviour
 
 					try {
 
-						while (!targetList.Peek ().GetComponent<Grunt> ().inRange) {
+						while (targetList.Peek () != null && !targetList.Peek ().GetComponent<Grunt> ().inRange) {
 							targetList.Dequeue ();
 						}
 				 
