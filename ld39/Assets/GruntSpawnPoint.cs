@@ -3,26 +3,81 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GruntSpawnPoint : MonoBehaviour {
-	public float timeToNextSpawn = 1f;
-	public float gruntSpeed = 3f;
+
+	[System.Serializable]
+	public class Wave
+	{
+		public GameObject enemyPrefab;
+		public int maxEnemies;
+		public int spawnInterval;
+		public int enemySpeed;
+	}
+
+	public Wave[] waves;
+	public int timeBetweenWaves = 5;
+	public int currentWave = 0;
+		float lastSpawnTime;
+	public int enemiesSpawned = 0;
+
+	public float timeToNextSpawn = 1f;//THIS VARIABLE SHOULD BE CHANGED IN THE INSPECTOR FOR EACH WAVE, NOT HERE
+	//public float gruntSpeed = 3f;
+
+	public int timeBeforeFirstWave;
+	public bool beginWaves = false;
+
 	public Transform[] targetList;
 	// Use this for initialization
 	void Start () {
 		GetComponent<SpriteRenderer> ().enabled = false;
+
+
 	}
-	IEnumerator spawnTime() {
+
+	void Awake(){
+		StartCoroutine (StartWaves ());
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+		if (beginWaves)
+		{
+			if (currentWave < waves.Length){
+				float timeInterval = Time.time - lastSpawnTime;
+				float spawnInterval = waves [currentWave].spawnInterval;
+
+				if ((currentWave == 0 && enemiesSpawned == 0)||((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || enemiesSpawned > 0 && timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies){
+					lastSpawnTime = Time.time;
+					StartCoroutine (spawnTime (waves[currentWave].enemyPrefab, waves[currentWave].enemySpeed));
+					enemiesSpawned++;
+				}
+
+				if (enemiesSpawned == waves[currentWave].maxEnemies)
+				{
+					currentWave++;
+					enemiesSpawned  = 0;
+					lastSpawnTime = Time.time;
+				}
+			}
+			else if (GameObject.FindGameObjectWithTag("Grunt") == null)
+			{
+				Debug.Log ("LEVEL COMPLETE");
+			}
+		}
+
+	}//Update
+
+	IEnumerator spawnTime(GameObject gruntPrefab, int gruntSpeed) {
 		yield return new WaitForSeconds(timeToNextSpawn);
-		StartCoroutine (spawnTime ());
-		var grunt = (GameObject) Instantiate(Resources.Load("prefab/grunt"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+		//StartCoroutine (spawnTime ());
+		var grunt = (GameObject) Instantiate(gruntPrefab, GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 		grunt.GetComponent<Grunt> ().targetList = targetList;
 		grunt.GetComponent<Grunt> ().speed = gruntSpeed;
 
 	}
-	void Awake() {
-		StartCoroutine (spawnTime ());
-	}
-	// Update is called once per frame
-	void Update () {
-		
+
+	IEnumerator StartWaves(){
+		yield return new WaitForSeconds (timeBeforeFirstWave);
+		beginWaves = true;
 	}
 }
