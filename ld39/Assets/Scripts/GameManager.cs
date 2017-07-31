@@ -167,7 +167,8 @@ public class GameManager : MonoBehaviour {
 			warningText.enabled = true;
 			if (currentLevel == 5)
 			{
-				warningString = "ALL FIVE LEVELS CLEARED! YOU WIND THE GAME!";
+				warningString = "ALL FIVE LEVELS CLEARED!\n YOU WIND THE GAME!";
+				GameObject.Find ("Canvas").GetComponent<TowerButton> ().buildingWarningText.enabled = false;
 				warningText.text = warningString;
 				warningText.enabled = true;
 

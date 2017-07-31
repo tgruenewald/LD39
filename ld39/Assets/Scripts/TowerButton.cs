@@ -101,6 +101,8 @@ public class TowerButton : MonoBehaviour {
 
 	void PlaceTower ()
 	{
+		AudioSource audio = gameObject.AddComponent<AudioSource> ();//gameObject.addComponent<AudioSource >();
+		audio.PlayOneShot((AudioClip)Resources.Load("Music/build-2"), 1f);
 		CreateTower (Input.mousePosition);
 		buildingWarningText.enabled = false;
 		//cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";

@@ -30,10 +30,11 @@ public class Tower : MonoBehaviour
 	public bool creatingMode = false;
 	public bool redirectMode = false;
 	GameObject[] windMarker;
-
+	AudioSource audio;
 	void Start ()
 	{
 		power = startpower;
+		audio= gameObject.AddComponent<AudioSource> ();//gameObject.addComponent<AudioSource >();
 
 		// bullet.transform.position = transform.position;
 	}
@@ -81,7 +82,7 @@ public class Tower : MonoBehaviour
 					Transform[] t = new Transform[1];
 					t [0] = windMarker[0].transform;
 					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
-								
+						audio.PlayOneShot((AudioClip)Resources.Load("Music/wind"), 1f);			
 					grunt.GetComponent<Wind> ().targetList = t; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
 					grunt.GetComponent<Wind> ().speed = 6f;
 					grunt.GetComponent<Wind> ().windId = gameObject.GetInstanceID();	;		
@@ -109,7 +110,7 @@ public class Tower : MonoBehaviour
 							StartCoroutine (waitForNextShoot ());
 							power-=2;
 							GameObject bullet = (GameObject)Instantiate (Resources.Load ("prefab/bullet"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
-
+							audio.PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 1f);
 
 							//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
 							bullet.transform.position = Vector3.MoveTowards (bullet.transform.position, target.transform.position, bulletSpeed);
