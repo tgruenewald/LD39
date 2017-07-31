@@ -39,6 +39,7 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 	void Awake(){
 		//StartCoroutine (StartWaves ());
+		GameObject.Find ("Canvas").GetComponent<GameManager> ().currentWaveText.text = "Wave " + (currentWave + 1) + " of " + waves.Length;
 	}
 
 
@@ -60,6 +61,7 @@ public class GruntSpawnPoint : MonoBehaviour {
 					float spawnInterval = waves [currentWave].spawnInterval;
 
 					if ((currentWave == 0 && enemiesSpawned == 0)||((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || enemiesSpawned > 0 && timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies){
+						GameObject.Find ("Canvas").GetComponent<GameManager> ().currentWaveText.text = "Wave " + (currentWave + 1) + " of " + waves.Length;
 						SetMusic ("attack");
 						lastSpawnTime = Time.time;
 						StartCoroutine (spawnTime (waves[currentWave].enemyPrefab, waves[currentWave].enemySpeed));
@@ -68,6 +70,7 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 					if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Grunt") == null)
 					{
+
 						SetMusic ("prepare");
 						currentWave++;
 						enemiesSpawned  = 0;

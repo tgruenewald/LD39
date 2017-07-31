@@ -11,18 +11,22 @@ public class GameManager : MonoBehaviour {
 	public int warningLevel = 250;
 	public Text warningText;
 	public Text powerAmountText;
+	public Text currentWaveText;
+
 	public string warningString;
 	public Slider energyBar;
 	public const int AUTOMATIC = 0;
 	public const int REDIRECT = 1;
-
+	public int timeBeforeWaves = 15;
 
 	public bool beginLevel = false;
 	public bool levelComplete = false;
 	public bool gameOver = false;
+	public int timeToNextLevel = 5;
+
+	public int currentLevel;
 
 	void Start(){
-		StartCoroutine (BlinkText ());
 		StartCoroutine (NaturalDepletion());
 
 		energyBar.value = 1000;
@@ -42,14 +46,15 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
 	{
-		beginLevel = true;
+		StartCoroutine (WarnBeforeWaves ());
+		currentLevel = int.Parse(SceneManager.GetActiveScene ().name.Substring (5, 1));
 	}
 
 	void Update(){
 
 		if (Input.GetKeyDown(KeyCode.W))
 		{
-			SceneManager.LoadScene ("scene2");
+			SceneManager.LoadScene ("level" + currentLevel);
 
 		}
 
@@ -69,12 +74,12 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("You pressed D");
 				change_selected_towers (REDIRECT);
 			}
-			if (fortressPower <= warningLevel)
+			if (fortressPower <= warningLevel && !gameOver && !levelComplete)
 			{
 				warningText.enabled = true;
 				warningString = "WARNING: RUNNING OUT OF POWER";
 			}
-			else {
+			else if (beginLevel){
 				warningText.enabled = false;
 			}
 
@@ -120,7 +125,28 @@ public class GameManager : MonoBehaviour {
 
 		}*/
 	}
+	public IEnumerator WarnBeforeWaves()
+	{
+		Debug.Log ("warning");
+		while (timeBeforeWaves > 0)
+		{
+			if (timeBeforeWaves == 1)
+			{
+				warningText.text = "Waves will begin in " + timeBeforeWaves + " second";
+			}
+			else{
+				warningText.text = "Waves will begin in " + timeBeforeWaves + " seconds";
+			}
+			warningText.enabled = true;
+			timeBeforeWaves--;
+			yield return new WaitForSeconds(1f);
+		}
+		beginLevel = true;
+		warningString = "";
+		StartCoroutine (BlinkText ());
 
+
+	}
 	public void CheckIfLevelComplete()
 	{
 		bool allGruntsDead = true;
@@ -135,15 +161,38 @@ public class GameManager : MonoBehaviour {
 		{
 			levelComplete = true;
 			warningText.enabled = true;
-			warningString = "YOU SHOT THE BREEZE! YOU WIN!";
+			if (currentLevel == 5)
+			{
+				warningString = "ALL FIVE LEVELS CLEARED! YOU WIND THE GAME!";
+			}
+			else{
+				warningString = "WELL DONE! YOU SHOT THE BREEZE!";
+				StartCoroutine (LoadNextLevel ());
+			}
+
 		}
 	}
 
+	IEnumerator LoadNextLevel()
+	{
+		while (timeToNextLevel > 0)
+		{
+			yield return new WaitForSeconds(1f);
+			GameObject.Find ("Canvas").GetComponent<TowerButton> ().buildingWarningText.text = "Loading next level in " + timeToNextLevel;
+			GameObject.Find ("Canvas").GetComponent<TowerButton> ().buildingWarningText.enabled = true;
+			timeToNextLevel--;
+		}
+		currentLevel++;
+		SceneManager.LoadScene ("level" + currentLevel);
+
+
+	}
+
 	public void GameOver(){
+		gameOver = true;
 		StopCoroutine ("NaturalDepletion");
 		Debug.Log ("Game Over");
 		warningString = "GAME OVER: YOU RAN OUT OF POWER";
 		fortressPower = 0;
-		gameOver = true;
 	}
 }

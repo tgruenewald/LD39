@@ -107,7 +107,7 @@ public class Tower : MonoBehaviour
 							target = targetList.Dequeue ();
 							alreadyFired = true;
 							StartCoroutine (waitForNextShoot ());
-							power--;
+							power-=2;
 							GameObject bullet = (GameObject)Instantiate (Resources.Load ("prefab/bullet"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
 
 
@@ -267,7 +267,7 @@ public class Tower : MonoBehaviour
 		newBar.transform.SetParent (canvas);
 
 		newBar.value = startpower;
-		newBar.maxValue = startpower * 2;
+		newBar.maxValue = maxpower;
 
 	}
 

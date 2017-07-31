@@ -7,11 +7,25 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/scene1.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/title.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/scene2.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/credits.unity
   - enabled: 0
     path: Assets/tower_trial_meredith3.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/level2.unity
+  - enabled: 0
+    path: Assets/Scenes in Game/level3.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/level1.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/credits.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/title.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/level4.unity
+  - enabled: 1
+    path: Assets/Scenes in Game/level5.unity

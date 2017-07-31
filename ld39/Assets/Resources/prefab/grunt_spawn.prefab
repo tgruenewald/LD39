@@ -35,8 +35,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682362507173864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.33, y: -0.45, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: -8.78, y: 4.85, z: 0}
+  m_LocalScale: {x: 2.6645546, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,21 +55,41 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
       type: 2}
-    maxEnemies: 4
-    spawnInterval: 1
+    maxEnemies: 10
+    spawnInterval: 0.5
     enemySpeed: 3
   - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
       type: 2}
-    maxEnemies: 4
-    spawnInterval: 1
+    maxEnemies: 20
+    spawnInterval: 0.5
+    enemySpeed: 3
+  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
+      type: 2}
+    maxEnemies: 30
+    spawnInterval: 0.5
+    enemySpeed: 3
+  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
+      type: 2}
+    maxEnemies: 40
+    spawnInterval: 0.5
     enemySpeed: 3
   timeBetweenWaves: 5
   currentWave: 0
   enemiesSpawned: 0
-  timeToNextSpawn: 1
+  timeToNextSpawn: 0.7
   timeBeforeFirstWave: 2
   beginWaves: 0
+  spawningComplete: 0
+  prepareMusic: 1
+  attackMusic: 0
   targetList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
