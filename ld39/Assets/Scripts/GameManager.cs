@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour {
 	public Text powerAmountText;
 	public string warningString;
 	public Slider energyBar;
+	public const int AUTOMATIC = 0;
+	public const int REDIRECT = 1;
+
 
 	void Start(){
 		StartCoroutine (BlinkText ());
@@ -19,8 +22,27 @@ public class GameManager : MonoBehaviour {
 
 		energyBar.value = 1000;
 	}
+	void change_selected_towers(int mode) {
+		GameObject[] selectedTowers;
+		GameObject[] windMarkers = null;
+	    selectedTowers = GameObject.FindGameObjectsWithTag("selected_tower");
+		if (mode == REDIRECT && selectedTowers.Length > 0) {
+			// create just one wind marker
+			windMarkers = selectedTowers [0].GetComponent<Tower> ().CreateWindMarker (Input.mousePosition);
+		}
+		foreach (GameObject selectedTower in selectedTowers) {
+			selectedTower.GetComponent<Tower> ().change_mode (mode, windMarkers);
+		}
+	}
 	void Update(){
-
+		if (Input.GetKeyDown (KeyCode.A)) {
+			Debug.Log ("You pressed A");
+			change_selected_towers (AUTOMATIC);
+		}
+		if (Input.GetKeyDown (KeyCode.D)) {
+			Debug.Log ("You pressed D");
+			change_selected_towers (REDIRECT);
+		}
 		if (fortressPower <= warningLevel)
 		{
 			warningText.enabled = true;

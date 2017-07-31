@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour
 	public GameObject windMarkerPrefab = null;
 	public bool creatingMode = false;
 	public bool redirectMode = false;
-	Transform[] windMarker;
+	GameObject[] windMarker;
 
 	void Start ()
 	{
@@ -63,10 +63,7 @@ public class Tower : MonoBehaviour
 			windMarkerPrefab.transform.position = new Vector3 (mousePos.x, mousePos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 		}
-		if (mouseCounter == 0) {
-			Debug.Log ("Restoring outer collider");
-			GetComponent<Collider2D> ().enabled = true;
-		}
+
 		if (power <= 0) {
 			Debug.Log ("Reloading");
 		} else {
@@ -78,9 +75,11 @@ public class Tower : MonoBehaviour
 					StartCoroutine (waitForNextShoot ());
 					power--;
 					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
-
-					grunt.GetComponent<Wind> ().targetList = windMarker; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
-					grunt.GetComponent<Wind> ().speed = 1f;
+					Transform[] t = new Transform[1];
+					t [0] = windMarker[0].transform;
+						
+					grunt.GetComponent<Wind> ().targetList = t; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
+					grunt.GetComponent<Wind> ().speed = 6f;
 				}
 			
 			} else {
@@ -151,32 +150,86 @@ public class Tower : MonoBehaviour
 
 	void OnMouseEnter ()
 	{
-
-		Debug.Log ("mouse entering collider");
-		mouseCounter++;
-		GetComponent<Collider2D> ().enabled = false;
+		if (tag != "selected_tower") {
+			Debug.Log ("mouse entering collider 96");
+			highlight ();
+		}
 	}
 
 	void OnMouseExit ()
 	{
-		mouseCounter--;
+		if (tag != "selected_tower") {
+			unhighlight ();
+		}
+
 	}
 
 	void OnMouseDown ()
 	{
-		CreateWindMarker (Input.mousePosition);
-	}
+		Debug.Log ("mouse down on tower");
+		if (tag == "selected_tower") {
+			tag = "tower";
+			unhighlight ();
+		}
+		else {
+			tag = "selected_tower";
+			Debug.Log ("becoming selected");
+			// CreateWindMarker (Input.mousePosition);
+			highlight ();			
+		}
 
-	public void CreateWindMarker (Vector2 mousePosition)
+
+	}
+	public void change_mode(int mode, GameObject[] windMarkers) {
+		if (redirectMode) {
+			// clean up
+			Debug.Log ("changing to redirect destroy old wind marker");
+			redirectMode = false;
+			if (windMarker.Length > 0)
+				DestroyObject (windMarker [0]);
+		}		
+		if (mode == GameManager.REDIRECT) {
+			this.windMarker = windMarkers;
+		}
+		else {
+			Debug.Log("resetting back to automatic");
+			tag = "tower";
+		}
+
+		Debug.Log ("unhighlighting");
+		// now deselect
+		unhighlight ();
+
+	}
+	void highlight() {
+		//temp.a = 0.5f;
+
+		GetComponent<SpriteRenderer> ().material.SetColor("_Color", Color.yellow);//.color = new Color(255,255,96,0.5f);
+		var gobj = transform.FindChild ("tower_range");
+		if (gobj != null)
+			gobj.GetComponent<SpriteRenderer> ().enabled = true;		
+	}
+	public void unhighlight() {
+		GetComponent<SpriteRenderer> ().material.SetColor("_Color", Color.white);
+		//temp.a = 0.5f;
+		var gobj = transform.FindChild ("tower_range");
+		if (gobj != null)
+			gobj.GetComponent<SpriteRenderer> ().enabled = false;		
+	}
+	public GameObject[] CreateWindMarker (Vector2 mousePosition)
 	{
+		redirectMode = false;
+		if (windMarker != null && windMarker.Length > 0)
+			DestroyObject (windMarker [0]);
 		creatingMode = true;
 		RaycastHit hit = RayFromCamera (mousePosition, 1000.0f);
 		Vector3 objectPos = Camera.main.ScreenToWorldPoint (mousePosition);
 		windMarkerPrefab = (GameObject)GameObject.Instantiate (Resources.Load ("prefab/wind_redirect_marker"), transform.position, Quaternion.identity);
 		windMarkerPrefab.GetComponent<WindMarkerPlacement> ().origWindMill = gameObject;
-		windMarker = new Transform[1];
+		windMarker = new GameObject[1];
 
-		windMarker [0] = windMarkerPrefab.transform; 
+		windMarker [0] = windMarkerPrefab; 
+		return windMarker;
 
 	}
 

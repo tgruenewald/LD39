@@ -5,7 +5,7 @@ using UnityEngine;
 public class WindMarkerPlacement : MonoBehaviour {
 	private Vector3 mousePos;
 	public GameObject origWindMill = null;
-	int count = 0;
+	bool hasStarted = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,15 +13,21 @@ public class WindMarkerPlacement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown(0)) {
-			count++;
+		if (!hasStarted && Input.GetMouseButtonDown(0)) {
+			hasStarted = true;
 			Debug.Log("WIND MARKER: mouse down");
+			GameObject[] selectedTowers;
+			selectedTowers = GameObject.FindGameObjectsWithTag("selected_tower");
 
+			foreach (GameObject selectedTower in selectedTowers) {
+				Debug.Log ("send wind");
+				selectedTower.GetComponent<Tower> ().creatingMode = false;
+				selectedTower.GetComponent<Tower> ().redirectMode = true;
+				selectedTower.GetComponent<Tower> ().unhighlight ();
+				selectedTower.tag = "tower";
+			}
 		}
-		if (count >= 2) {
-			origWindMill.GetComponent<Tower> ().creatingMode = false;
-			origWindMill.GetComponent<Tower> ().redirectMode = true;
-		}
+	
 	}
 
 
