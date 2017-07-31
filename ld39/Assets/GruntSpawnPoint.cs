@@ -44,42 +44,45 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-		if (GameObject.Find ("Canvas").GetComponent<GameManager>().beginLevel)
+		if (!GameObject.Find ("Canvas").GetComponent<GameManager>().gameOver)
 		{
-			StartCoroutine (StartWaves ());
-		}
+			if (GameObject.Find ("Canvas").GetComponent<GameManager>().beginLevel)
+			{
+				StartCoroutine (StartWaves ());
+			}
 
 
-		if (beginWaves)
-		{
-			if (currentWave < waves.Length){
-				
-				float timeInterval = Time.time - lastSpawnTime;
-				float spawnInterval = waves [currentWave].spawnInterval;
+			if (beginWaves)
+			{
+				if (currentWave < waves.Length){
 
-				if ((currentWave == 0 && enemiesSpawned == 0)||((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || enemiesSpawned > 0 && timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies){
-					SetMusic ("attack");
-					lastSpawnTime = Time.time;
-					StartCoroutine (spawnTime (waves[currentWave].enemyPrefab, waves[currentWave].enemySpeed));
-					enemiesSpawned++;
+					float timeInterval = Time.time - lastSpawnTime;
+					float spawnInterval = waves [currentWave].spawnInterval;
+
+					if ((currentWave == 0 && enemiesSpawned == 0)||((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || enemiesSpawned > 0 && timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies){
+						SetMusic ("attack");
+						lastSpawnTime = Time.time;
+						StartCoroutine (spawnTime (waves[currentWave].enemyPrefab, waves[currentWave].enemySpeed));
+						enemiesSpawned++;
+					}
+
+					if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Grunt") == null)
+					{
+						SetMusic ("prepare");
+						currentWave++;
+						enemiesSpawned  = 0;
+						lastSpawnTime = Time.time;
+					}
 				}
-
-				if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Grunt") == null)
+				else if (GameObject.FindGameObjectWithTag("Grunt") == null)
 				{
 					SetMusic ("prepare");
-					currentWave++;
-					enemiesSpawned  = 0;
-					lastSpawnTime = Time.time;
+					Debug.Log ("WAVES COMPLETE");
+					spawningComplete = true;
 				}
-			}
-			else if (GameObject.FindGameObjectWithTag("Grunt") == null)
-			{
-				SetMusic ("prepare");
-				Debug.Log ("WAVES COMPLETE");
-				spawningComplete = true;
-			}
-		}
+			}//if beginWaves
+
+		}//if not gameOver
 
 	}//Update
 

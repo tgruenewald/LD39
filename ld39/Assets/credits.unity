@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -532, y: 356}
+  m_AnchoredPosition: {x: -532, y: 387}
   m_SizeDelta: {x: 609, y: 394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293051101
@@ -422,7 +422,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 2.11
   m_Text: "Terry Gruenewald\t\t  Project Lead & Programming\nMeredith Chen\t  \t\t
-    \ Programming\nThomas Gruenewald\t  Programming\nJason Gruenewald\t\t  Level Design\nJarkko
+    \ Programming\nThomas Gruenewald\t  Programming\nJason Gruenewald\t\t  Programming/Art\nJarkko
     Ahvenniemi\t      Music\r\nHenna Ahvenniemi\t\t  Art\r\nTamara Gruenewald\t  Character
     Design\nMelissa Gruenewald      Character Design\nDavis\t\t \t\t   \t\t  Physicist\n\n\n"
 --- !u!222 &293051102

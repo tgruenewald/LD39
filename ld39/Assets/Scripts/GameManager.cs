@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public int fortressPower = 1000;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool beginLevel = false;
 	public bool levelComplete = false;
+	public bool gameOver = false;
 
 	void Start(){
 		StartCoroutine (BlinkText ());
@@ -44,32 +46,49 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.A)) {
-			Debug.Log ("You pressed A");
-			change_selected_towers (AUTOMATIC);
-		}
-		if (Input.GetKeyDown (KeyCode.D)) {
-			Debug.Log ("You pressed D");
-			change_selected_towers (REDIRECT);
-		}
-		if (fortressPower <= warningLevel)
+
+		if (Input.GetKeyDown(KeyCode.W))
 		{
-			warningText.enabled = true;
-			warningString = "WARNING: RUNNING OUT OF POWER";
-		}
-		else {
-			warningText.enabled = false;
+			SceneManager.LoadScene ("scene2");
+
 		}
 
-		if (fortressPower <= 0)
+		if (Input.GetKeyDown(KeyCode.M))
 		{
-			GameOver ();
+			SceneManager.LoadScene ("title");
+
 		}
 
-		powerAmountText.text = "Main Power: " + fortressPower;
-		UpdateEnergyBar ();
+		if (!levelComplete)
+		{
+			if (Input.GetKeyDown (KeyCode.A)) {
+				Debug.Log ("You pressed A");
+				change_selected_towers (AUTOMATIC);
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				Debug.Log ("You pressed D");
+				change_selected_towers (REDIRECT);
+			}
+			if (fortressPower <= warningLevel)
+			{
+				warningText.enabled = true;
+				warningString = "WARNING: RUNNING OUT OF POWER";
+			}
+			else {
+				warningText.enabled = false;
+			}
 
-		CheckIfLevelComplete ();
+			if (fortressPower <= 0)
+			{
+				GameOver ();
+			}
+
+			powerAmountText.text = "Main Power: " + fortressPower;
+			UpdateEnergyBar ();
+
+			CheckIfLevelComplete ();
+		}
+
 
 	}//Update
 
@@ -113,12 +132,17 @@ public class GameManager : MonoBehaviour {
 				allGruntsDead = false;
 		}
 		if (allGruntsDead)
+		{
 			levelComplete = true;
+			warningText.enabled = true;
+			warningString = "YOU SHOT THE BREEZE! YOU WIN!";
+		}
 	}
 
 	public void GameOver(){
 		StopCoroutine ("NaturalDepletion");
-		warningString = "YOU RAN OUT OF POWER";
+		warningString = "GAME OVER: YOU RAN OUT OF POWER";
 		fortressPower = 0;
+		gameOver = true;
 	}
 }

@@ -23,11 +23,16 @@ public class TowerButton : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
+		cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			TaskOnClick ();
+		}
+
 		if (creating) {
 			mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -98,7 +103,7 @@ public class TowerButton : MonoBehaviour {
 	{
 		CreateTower (Input.mousePosition);
 		buildingWarningText.enabled = false;
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
+		cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 		creating = false;
 	}
 
@@ -114,7 +119,7 @@ public class TowerButton : MonoBehaviour {
 	public void CancelTower(){
 		creating = false;
 		Destroy (placingTowerIcon);
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
+		cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 	}
 
 	public void CreateTowerIcon(Vector2 mousePosition)

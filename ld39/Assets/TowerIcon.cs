@@ -21,7 +21,7 @@ public class TowerIcon : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 
 
