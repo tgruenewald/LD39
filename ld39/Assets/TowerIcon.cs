@@ -68,7 +68,7 @@ public class TowerIcon : MonoBehaviour {
 		//gameObject.GetComponent<SpriteRenderer> ().material.color = new Color32(255,255,255,150);
 		Debug.Log(coll.gameObject.tag);
 
-		if (coll.gameObject.tag == "tower_meredith" || coll.gameObject.tag == "border") {
+		if (coll.gameObject.tag == "tower" || coll.gameObject.tag == "border") {
 			collisionCount++;
 
 
@@ -79,7 +79,7 @@ public class TowerIcon : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D coll){
 
 		//gameObject.GetComponent<SpriteRenderer> ().material.color = Color.green;
-		if (coll.gameObject.tag == "tower_meredith"|| coll.gameObject.tag == "border") {
+		if (coll.gameObject.tag == "tower"|| coll.gameObject.tag == "border") {
 			collisionCount--;
 		}
 		Debug.Log ("exit collision "+ coll.gameObject.tag);
