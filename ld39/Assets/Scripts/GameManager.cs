@@ -63,6 +63,12 @@ public class GameManager : MonoBehaviour {
 			SceneManager.LoadScene ("title");
 
 		}
+		if (fortressPower <= 0 || gameOver)
+		{
+			GameOver ();
+		}
+
+
 
 		if (!levelComplete && !gameOver)
 		{
@@ -83,16 +89,12 @@ public class GameManager : MonoBehaviour {
 				warningText.enabled = false;
 			}
 
-			if (fortressPower <= 0)
-			{
-				GameOver ();
-			}
 
-			powerAmountText.text = "Main Power: " + fortressPower;
-			UpdateEnergyBar ();
+
 
 			CheckIfLevelComplete ();
 		}
+		UpdateEnergyBar ();
 
 
 	}//Update
@@ -116,6 +118,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateEnergyBar(){
+		powerAmountText.text = "Main Power: " + fortressPower;
+
 		energyBar.value = fortressPower;
 		/*if(energyBar.value < 100){
 			energyBar.color = Color.Lerp (Color.red, Color.white, Mathf.PingPong (Time.time, 1f));
@@ -164,9 +168,16 @@ public class GameManager : MonoBehaviour {
 			if (currentLevel == 5)
 			{
 				warningString = "ALL FIVE LEVELS CLEARED! YOU WIND THE GAME!";
+				warningText.text = warningString;
+				warningText.enabled = true;
+
 			}
 			else{
+				
 				warningString = "WELL DONE! YOU SHOT THE BREEZE!";
+				warningText.text = warningString;
+				warningText.enabled = true;
+
 				StartCoroutine (LoadNextLevel ());
 			}
 
@@ -193,6 +204,8 @@ public class GameManager : MonoBehaviour {
 		StopCoroutine ("NaturalDepletion");
 		Debug.Log ("Game Over");
 		warningString = "GAME OVER: YOU RAN OUT OF POWER";
+		warningText.text = warningString;
+		warningText.enabled = true;
 		fortressPower = 0;
 	}
 }
