@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114163474917262376}
   m_Layer: 0
   m_Name: grunt_spawn
-  m_TagString: Untagged
+  m_TagString: gruntSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682362507173864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.600227, y: -1.6200631, z: 0}
+  m_LocalPosition: {x: -14.33, y: -0.45, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +52,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81618748f2c8874ca5f7e15c1ea78c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
+      type: 2}
+    maxEnemies: 4
+    spawnInterval: 1
+    enemySpeed: 3
+  - enemyPrefab: {fileID: 1477717442228836, guid: 98272c41cded2e24caad6879a1b22118,
+      type: 2}
+    maxEnemies: 4
+    spawnInterval: 1
+    enemySpeed: 3
+  timeBetweenWaves: 5
+  currentWave: 0
+  enemiesSpawned: 0
   timeToNextSpawn: 1
-  targetList: []
+  timeBeforeFirstWave: 2
+  beginWaves: 0
+  targetList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &212025412213805930
 SpriteRenderer:
   m_ObjectHideFlags: 1

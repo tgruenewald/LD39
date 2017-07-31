@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
 	public const int REDIRECT = 1;
 
 
+	public bool beginLevel = false;
+	public bool levelComplete = false;
+
 	void Start(){
 		StartCoroutine (BlinkText ());
 		StartCoroutine (NaturalDepletion());
@@ -34,6 +37,12 @@ public class GameManager : MonoBehaviour {
 			selectedTower.GetComponent<Tower> ().change_mode (mode, windMarkers);
 		}
 	}
+
+	void Awake()
+	{
+		beginLevel = true;
+	}
+
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.A)) {
 			Debug.Log ("You pressed A");
@@ -59,6 +68,8 @@ public class GameManager : MonoBehaviour {
 
 		powerAmountText.text = "Main Power: " + fortressPower;
 		UpdateEnergyBar ();
+
+		CheckIfLevelComplete ();
 
 	}//Update
 
@@ -89,6 +100,20 @@ public class GameManager : MonoBehaviour {
 			energyBar.image.color = Color.Lerp (Color.red, Color.blue, energyBar.value);
 
 		}*/
+	}
+
+	public void CheckIfLevelComplete()
+	{
+		bool allGruntsDead = true;
+		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag ("gruntSpawnPoint");
+		foreach (GameObject spawnPoint in spawnPoints)
+		{
+
+			if (spawnPoint.GetComponent<GruntSpawnPoint>().spawningComplete == false)
+				allGruntsDead = false;
+		}
+		if (allGruntsDead)
+			levelComplete = true;
 	}
 
 	public void GameOver(){

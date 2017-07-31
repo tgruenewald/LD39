@@ -16,6 +16,7 @@ TagManager:
   - border
   - selected_tower
   - tower
+  - gruntSpawnPoint
   layers:
   - Default
   - TransparentFX

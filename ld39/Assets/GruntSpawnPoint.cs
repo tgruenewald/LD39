@@ -24,6 +24,10 @@ public class GruntSpawnPoint : MonoBehaviour {
 
 	public int timeBeforeFirstWave;
 	public bool beginWaves = false;
+	public bool spawningComplete = false;
+
+	public bool prepareMusic = true;
+	public bool attackMusic = false;
 
 	public Transform[] targetList;
 	// Use this for initialization
@@ -34,26 +38,36 @@ public class GruntSpawnPoint : MonoBehaviour {
 	}
 
 	void Awake(){
-		StartCoroutine (StartWaves ());
+		//StartCoroutine (StartWaves ());
 	}
 
 
 	// Update is called once per frame
 	void Update () {
+
+		if (GameObject.Find ("Canvas").GetComponent<GameManager>().beginLevel)
+		{
+			StartCoroutine (StartWaves ());
+		}
+
+
 		if (beginWaves)
 		{
 			if (currentWave < waves.Length){
+				
 				float timeInterval = Time.time - lastSpawnTime;
 				float spawnInterval = waves [currentWave].spawnInterval;
 
 				if ((currentWave == 0 && enemiesSpawned == 0)||((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || enemiesSpawned > 0 && timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave].maxEnemies){
+					SetMusic ("attack");
 					lastSpawnTime = Time.time;
 					StartCoroutine (spawnTime (waves[currentWave].enemyPrefab, waves[currentWave].enemySpeed));
 					enemiesSpawned++;
 				}
 
-				if (enemiesSpawned == waves[currentWave].maxEnemies)
+				if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Grunt") == null)
 				{
+					SetMusic ("prepare");
 					currentWave++;
 					enemiesSpawned  = 0;
 					lastSpawnTime = Time.time;
@@ -61,7 +75,9 @@ public class GruntSpawnPoint : MonoBehaviour {
 			}
 			else if (GameObject.FindGameObjectWithTag("Grunt") == null)
 			{
-				Debug.Log ("LEVEL COMPLETE");
+				SetMusic ("prepare");
+				Debug.Log ("WAVES COMPLETE");
+				spawningComplete = true;
 			}
 		}
 
@@ -79,5 +95,32 @@ public class GruntSpawnPoint : MonoBehaviour {
 	IEnumerator StartWaves(){
 		yield return new WaitForSeconds (timeBeforeFirstWave);
 		beginWaves = true;
+	}
+
+	void SetMusic(string musicType)
+	{
+		Debug.Log ("setting music: " + musicType);
+		if (musicType == "prepare")
+		{
+			if (attackMusic)
+			{
+				GameObject.Find ("Main Camera").GetComponent<AudioManager> ().PlayAttackMusic ();
+				attackMusic = false;
+				prepareMusic = true;
+			}
+
+		}
+			
+		if (musicType == "attack")
+		{
+			if (prepareMusic)
+			{
+				GameObject.Find ("Main Camera").GetComponent<AudioManager> ().PlayPrepareMusic ();
+				prepareMusic = false;
+				attackMusic = true;
+			}
+		}
+			
+		
 	}
 }

@@ -54,14 +54,15 @@ public class Tower : MonoBehaviour
 
 	}
 	// Update is called once per frame
-	void Update ()
-	{
-
+	void Update () {
 		if (windMarkerPrefab != null && creatingMode) {
 			mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint (mousePos);
 			windMarkerPrefab.transform.position = new Vector3 (mousePos.x, mousePos.y, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
+		if (mouseCounter == 0) {
+			//Debug.Log ("Restoring outer collider");
+			GetComponent<Collider2D> ().enabled = true;
 		}
 
 		if (power <= 0) {

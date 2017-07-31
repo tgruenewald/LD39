@@ -6,7 +6,7 @@ public class WindSpawnPoint : MonoBehaviour {
 
 	public float timeToNextWind = 1f;
 	public float timeBeforeStarting = 1f;
-	public float timeToPauseWind = 5f;
+	public float timeToPauseWind = 1f;
 	bool beginWind = false;
 	// Use this for initialization
 	void Start () {
@@ -39,8 +39,15 @@ public class WindSpawnPoint : MonoBehaviour {
 		StartCoroutine (dotimeBeforeStarting ());
 	}
 	void make_wind() {
-		var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
-		grunt.GetComponent<Wind> ().targetList = gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
-		grunt.GetComponent<Wind> ().speed = gameObject.GetComponentInParent<WindSpawnPointParent>().windSpeed;
+
+		if (GameObject.Find ("Canvas").GetComponent<GameManager>().beginLevel)
+		{
+			var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
+			grunt.GetComponent<Wind> ().targetList = gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
+			grunt.GetComponent<Wind> ().speed = gameObject.GetComponentInParent<WindSpawnPointParent>().windSpeed;
+		}
+
+
+
 	}
 }
