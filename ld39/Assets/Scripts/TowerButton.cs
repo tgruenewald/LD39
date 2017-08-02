@@ -23,11 +23,16 @@ public class TowerButton : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power.";
+		//cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			TaskOnClick ();
+		}
+
 		if (creating) {
 			mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -49,7 +54,7 @@ public class TowerButton : MonoBehaviour {
 					buildingWarningText.enabled = true;
 					buildingWarningText.text = "Invalid place to build tower.";
 				}
-				else if (dangerousBuild)
+/*				else if (dangerousBuild)
 				{
 					dangerousBuild = false;
 					PlaceTower ();
@@ -59,7 +64,7 @@ public class TowerButton : MonoBehaviour {
 					buildingWarningText.text = "POWER WILL BE DANGEROUSLY LOW!\n To build anyway, click again.";
 					buildingWarningText.enabled = true;
 					dangerousBuild = true;
-				}
+				}*/
 				else{
 					PlaceTower ();
 
@@ -90,15 +95,17 @@ public class TowerButton : MonoBehaviour {
 			
 		else {
 			CreateTowerIcon (Input.mousePosition);
-			cancelText.text = "To cancel, press space bar.\nTower Cost: " + towerCost + " Power";
+			//cancelText.text = "To cancel, press space bar.\nTower Cost: " + towerCost + " Power";
 		}
 	}
 
 	void PlaceTower ()
 	{
+		AudioSource audio = gameObject.AddComponent<AudioSource> ();//gameObject.addComponent<AudioSource >();
+		audio.PlayOneShot((AudioClip)Resources.Load("Music/build-2"), 1f);
 		CreateTower (Input.mousePosition);
 		buildingWarningText.enabled = false;
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
+		//cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 		creating = false;
 	}
 
@@ -114,7 +121,7 @@ public class TowerButton : MonoBehaviour {
 	public void CancelTower(){
 		creating = false;
 		Destroy (placingTowerIcon);
-		cancelText.text = "<-- Click to build a tower.\nTower Cost: " + towerCost + " Power";
+		//cancelText.text = "Press 'S' to Build Tower\nTower Cost: " + towerCost + " Power";
 	}
 
 	public void CreateTowerIcon(Vector2 mousePosition)

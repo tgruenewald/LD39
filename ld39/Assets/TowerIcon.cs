@@ -21,7 +21,7 @@ public class TowerIcon : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 
 
@@ -30,11 +30,13 @@ public class TowerIcon : MonoBehaviour {
 		if (collisionCount == 0)
 		{
 			GameObject.Find ("Canvas").GetComponent<TowerButton> ().creatingDisabled = false;
+			GetComponent<SpriteRenderer> ().material.SetColor("_Color", Color.white);
 			isTouching = true;
 
 		}
 		else
 		{
+			GetComponent<SpriteRenderer> ().material.SetColor("_Color", Color.red);//.color = new Color(255,255,96,0.5f);
 			GameObject.Find ("Canvas").GetComponent<TowerButton> ().creatingDisabled = true;
 			isTouching = false;
 

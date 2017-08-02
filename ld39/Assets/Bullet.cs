@@ -6,9 +6,11 @@ public class Bullet : MonoBehaviour {
 	public GameObject origTarget;
 	public Vector2 origTargetVelocity;
 	public float speed;
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (checkSpeed ());
+
 	}
 	IEnumerator checkSpeed() {
 		yield return new WaitForSeconds (3);
@@ -36,7 +38,7 @@ public class Bullet : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll){
 
 		if (coll.gameObject.tag == "Grunt") {
-
+			
 			coll.gameObject.GetComponent<Grunt> ().health--;
 			Destroy (this.gameObject);	
 		}

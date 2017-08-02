@@ -30,10 +30,13 @@ public class Tower : MonoBehaviour
 	public bool creatingMode = false;
 	public bool redirectMode = false;
 	GameObject[] windMarker;
-
+	AudioSource[] audio = new AudioSource[2];
 	void Start ()
 	{
 		power = startpower;
+		audio[0]= gameObject.AddComponent<AudioSource> ();//gameObject.addComponent<AudioSource >();
+		audio[1]= gameObject.AddComponent<AudioSource> ();
+
 
 		// bullet.transform.position = transform.position;
 	}
@@ -72,6 +75,8 @@ public class Tower : MonoBehaviour
 			if (redirectMode) {
 				if (!alreadyFired) {
 					try {
+						Debug.Log(" gameObject.GetInstanceID" + gameObject.GetInstanceID());
+
 					alreadyFired = true;
 					StartCoroutine (waitForNextShoot ());
 					Debug.Log ("shooting wind");
@@ -79,7 +84,7 @@ public class Tower : MonoBehaviour
 					Transform[] t = new Transform[1];
 					t [0] = windMarker[0].transform;
 					var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
-								
+						audio[0].PlayOneShot((AudioClip)Resources.Load("Music/wind"), 1f);			
 					grunt.GetComponent<Wind> ().targetList = t; //gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
 					grunt.GetComponent<Wind> ().speed = 6f;
 					grunt.GetComponent<Wind> ().windId = gameObject.GetInstanceID();	;		
@@ -97,7 +102,7 @@ public class Tower : MonoBehaviour
 
 					try {
 
-						while (targetList.Count > 0 && targetList.Peek () != null && !targetList.Peek ().GetComponent<Grunt> ().inRange) {
+						while (targetList.Peek () != null && !targetList.Peek ().GetComponent<Grunt> ().inRange) {
 							targetList.Dequeue ();
 						}
 				 
@@ -105,9 +110,10 @@ public class Tower : MonoBehaviour
 							target = targetList.Dequeue ();
 							alreadyFired = true;
 							StartCoroutine (waitForNextShoot ());
-							power--;
+							power-=2;
 							GameObject bullet = (GameObject)Instantiate (Resources.Load ("prefab/bullet"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
-
+							audio [0].pitch = 0.5f;
+							audio[0].PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 1f);
 
 							//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
 							bullet.transform.position = Vector3.MoveTowards (bullet.transform.position, target.transform.position, bulletSpeed);
@@ -137,9 +143,8 @@ public class Tower : MonoBehaviour
 			superchargeText.transform.position = new Vector3 (3000, 3000, transform.position.z);// Vector2.Lerp(transform.position, mousePosition, moveSpeed);
 
 		}
-		newBar.value = power;
 
-	
+		newBar.value = power;
 	}//Update
 
 	void OnTriggerEnter2D (Collider2D coll)
@@ -177,6 +182,8 @@ public class Tower : MonoBehaviour
 
 	void OnMouseDown ()
 	{
+		audio [1].pitch = 3;
+		audio[1].PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 1f);
 		Debug.Log ("mouse down on tower");
 		if (tag == "selected_tower") {
 			tag = "tower";
@@ -266,7 +273,7 @@ public class Tower : MonoBehaviour
 		newBar.transform.SetParent (canvas);
 
 		newBar.value = startpower;
-		newBar.maxValue = startpower * 2;
+		newBar.maxValue = maxpower;
 
 	}
 

@@ -16,7 +16,7 @@ public class Title : MonoBehaviour {
 	}
 
 	public void clickStart() {
-		SceneManager.LoadScene ("scene2");
+		SceneManager.LoadScene ("level1");
 	}
 
 	public void clickCredits() {

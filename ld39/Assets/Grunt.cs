@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grunt : MonoBehaviour {
 	public Transform[] targetList;// =new Transform[];
 	private Transform target;
+	protected bool isGrunt = true;
 	public float speed = 0.1f;
 	public int nextTargetIndex = 0;
 	public bool inRange = false;
@@ -14,7 +15,7 @@ public class Grunt : MonoBehaviour {
 	void Start () {
 		target = targetList[nextTargetIndex];
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0) 

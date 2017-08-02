@@ -40,7 +40,7 @@ public class WindSpawnPoint : MonoBehaviour {
 	}
 	void make_wind() {
 
-		if (GameObject.Find ("Canvas").GetComponent<GameManager>().beginLevel)
+		if (true)
 		{
 			var grunt = (GameObject) Instantiate(Resources.Load("prefab/wind"), GetComponent<Transform>().position, GetComponent<Transform>().rotation) ;
 			grunt.GetComponent<Wind> ().targetList = gameObject.GetComponentInParent<WindSpawnPointParent>().targetList;
