@@ -21,6 +21,7 @@ public class windmill : MonoBehaviour {
 			if (coll.gameObject.GetComponent<Wind> ().windId != gameObject.transform.parent.gameObject.GetInstanceID()) {
 				GetComponentInParent<Tower> ().power++;
 				DestroyObject (coll.gameObject);
+
 			}
 
 		}
