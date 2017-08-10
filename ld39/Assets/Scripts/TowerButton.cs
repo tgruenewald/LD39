@@ -30,6 +30,8 @@ public class TowerButton : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.S))
 		{
+			
+			GameState.DisplayNextHelp (2);
 			TaskOnClick ();
 		}
 
@@ -66,6 +68,7 @@ public class TowerButton : MonoBehaviour {
 					dangerousBuild = true;
 				}*/
 				else{
+					GameState.DisplayNextHelp (3);
 					PlaceTower ();
 
 				}
@@ -78,6 +81,9 @@ public class TowerButton : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
+			if (GameState.EndTutorial()) {
+				StartCoroutine (GameObject.Find ("Canvas").GetComponent<GameManager> ().WarnBeforeWaves());
+			}
 			dangerousBuild = false;
 			buildingWarningText.enabled = false;
 			CancelTower ();

@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour {
 		if (mode == REDIRECT && selectedTowers.Length > 0) {
 			// create just one wind marker
 			windMarkers = selectedTowers [0].GetComponent<Tower> ().CreateWindMarker (Input.mousePosition);
+			selectedTowers [0].GetComponent<Tower> ().redirectSprite.enabled = true;
+		}
+		if (mode == AUTOMATIC) {
+			selectedTowers [0].GetComponent<Tower> ().redirectSprite.enabled = false;
 		}
 		foreach (GameObject selectedTower in selectedTowers) {
 			selectedTower.GetComponent<Tower> ().change_mode (mode, windMarkers);
@@ -46,8 +50,11 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
 	{
-		StartCoroutine (WarnBeforeWaves ());
+		
 		currentLevel = int.Parse(SceneManager.GetActiveScene ().name.Substring (5, 1));
+		if (currentLevel > 0) {
+			StartCoroutine (WarnBeforeWaves ());
+		}
 	}
 
 	void Update(){
@@ -78,6 +85,7 @@ public class GameManager : MonoBehaviour {
 			}
 			if (Input.GetKeyDown (KeyCode.D)) {
 				Debug.Log ("You pressed D");
+				GameState.DisplayNextHelp (4);
 				change_selected_towers (REDIRECT);
 			}
 			if (fortressPower <= warningLevel && !gameOver && !levelComplete)

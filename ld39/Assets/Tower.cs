@@ -24,6 +24,7 @@ public class Tower : MonoBehaviour
 	Vector3 superTextPos;
 	public GameObject superchargeText;
 	public int mouseCounter = 0;
+	public SpriteRenderer redirectSprite;
 
 	private Vector3 mousePos;
 	public GameObject windMarkerPrefab = null;
@@ -113,7 +114,7 @@ public class Tower : MonoBehaviour
 							power-=2;
 							GameObject bullet = (GameObject)Instantiate (Resources.Load ("prefab/bullet"), GetComponent<Transform> ().position, GetComponent<Transform> ().rotation);
 							audio [0].pitch = 0.5f;
-							audio[0].PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 1f);
+							audio[0].PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 4f);
 
 							//bullet.GetComponent<Rigidbody2D> ().velocity = transform.TransformDirection(target.transform.position); //ShootUtil.firingVector (transform, target, bulletSpeed);
 							bullet.transform.position = Vector3.MoveTowards (bullet.transform.position, target.transform.position, bulletSpeed);

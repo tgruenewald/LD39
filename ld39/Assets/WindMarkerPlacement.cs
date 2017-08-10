@@ -18,7 +18,7 @@ public class WindMarkerPlacement : MonoBehaviour {
 			AudioSource audio = gameObject.AddComponent<AudioSource> ();
 			audio.pitch = 3f;
 			audio.PlayOneShot((AudioClip)Resources.Load("Music/cannon"), 1f);
-
+			GameState.DisplayNextHelp (5);
 			GetComponent<SpriteRenderer> ().enabled = false;
 			Debug.Log("WIND MARKER: mouse down");
 			GameObject[] selectedTowers;
